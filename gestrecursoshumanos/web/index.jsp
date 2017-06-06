@@ -9,9 +9,41 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Gestao de Recursos Humanso</title>
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/jquery-1.12.3.min.js"></script>
     </head>
     <body>
-        <h1>Hello World!</h1>
+      <div class="jumbotron text-center">
+            <img src="imagens/equipe-rh.jpg" alt="" width="300" height="200"/>
+            <h1>RH</h1>
+            <p>Gestao de Recursos Humanso</p> 
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>Gestão de expediente</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Gestão de documentos</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Varios</h3>        
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </div>
+            </div>
+        </div>
+<div class="jumbotron text-center">
+     
+            <h3>Gestao de Recursos Humanso</h3>
+            <a href="#" class="btn btn-info" role="button">Entrar</a>
+        </div>
     </body>
 </html>
