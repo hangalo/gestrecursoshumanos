@@ -5,7 +5,6 @@
  */
 package dao;
 
-
 import modelo.Provincia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

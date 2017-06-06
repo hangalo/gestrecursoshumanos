@@ -5,7 +5,6 @@
  */
 package dao;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,18 +28,18 @@ public class PaisDAO implements GenericoDAO<Pais> {
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM pais WHERE codigoISOAlpha2Pais=?";
     private static final String LISTAR_TUDO = "SELECT * FROM pais";
 
-     Connection conn;
+    Connection conn;
     PreparedStatement ps;
     ResultSet rs;
 
     @Override
-    public void save(Pais pais){
-       
-            if (pais == null) {
-                System.out.println("O campo passado nao pode ser nulo");
-                
-            }
-             try {
+    public void save(Pais pais) {
+
+        if (pais == null) {
+            System.out.println("O campo passado nao pode ser nulo");
+
+        }
+        try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(INSERIR);
             ps.setString(1, pais.getCodigoISOAlpha2Pais());
@@ -48,21 +47,20 @@ public class PaisDAO implements GenericoDAO<Pais> {
             ps.setString(3, pais.getNomePais());
             ps.executeUpdate();
         } catch (SQLException ex) {
-                 System.out.println("erro na insercao de dados: "+ex.getMessage());
+            System.out.println("erro na insercao de dados: " + ex.getMessage());
+        } finally {
+            Conexao.closeConnection(conn, ps);
         }
-             finally{
-                 Conexao.closeConnection(conn, ps);
-             }
 
     }
 
     @Override
     public void update(Pais pais) {
-        
-            if (pais == null) {
-                System.out.println("O campo passado nao pode ser nulo");
-                
-            }
+
+        if (pais == null) {
+            System.out.println("O campo passado nao pode ser nulo");
+
+        }
         try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(ACTUALIZAR);
@@ -71,29 +69,29 @@ public class PaisDAO implements GenericoDAO<Pais> {
             ps.setString(3, pais.getNomePais());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println("Erro ao atualizar dados: "+ex.getMessage());
-                 }finally{
+            System.out.println("Erro ao atualizar dados: " + ex.getMessage());
+        } finally {
             Conexao.closeConnection(conn, ps);
         }
 
     }
 
     @Override
-    public void delete(Pais pais){
-        
-            if (pais == null) {
-                System.out.println("O campo passado nao pode ser nulo");
-                
-            }
-        
+    public void delete(Pais pais) {
+
+        if (pais == null) {
+            System.out.println("O campo passado nao pode ser nulo");
+
+        }
+
         try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(ELIMINAR);
             ps.setString(1, pais.getCodigoISOAlpha2Pais());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println("Erro ao eliminar dados: "+ex.getMessage());
-                 }finally{
+            System.out.println("Erro ao eliminar dados: " + ex.getMessage());
+        } finally {
             Conexao.closeConnection(conn, ps);
         }
 
@@ -103,21 +101,20 @@ public class PaisDAO implements GenericoDAO<Pais> {
     public Pais findById(Integer id) {
         Pais pais = new Pais();
         try {
-            
+
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(BUSCAR_POR_CODIGO);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (!rs.next()) {
                 System.out.println("Nao existe nenhum dado com esse ID.");
-                
+
             }
             popularComDados(pais, rs);
-            
-            
-        }  catch (SQLException ex) {
-            System.out.println("Erro ao carregar dados: "+ex.getMessage());
-                 }finally{
+
+        } catch (SQLException ex) {
+            System.out.println("Erro ao carregar dados: " + ex.getMessage());
+        } finally {
             Conexao.closeConnection(conn, ps, rs);
         }
         return pais;
@@ -125,30 +122,29 @@ public class PaisDAO implements GenericoDAO<Pais> {
 
     @Override
     public List<Pais> findAll() {
-         ArrayList<Pais> itens = new ArrayList<Pais>();
-            
+        ArrayList<Pais> itens = new ArrayList<Pais>();
+
         try {
-           
+
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(LISTAR_TUDO);
             rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Pais pais = new Pais();
                 popularComDados(pais, rs);
                 itens.add(pais);
-                
+
             }
-            
-          
+
         } catch (SQLException ex) {
-            System.out.println("Erro ao carregar dados: "+ex.getMessage());
-                 }finally{
+            System.out.println("Erro ao carregar dados: " + ex.getMessage());
+        } finally {
             Conexao.closeConnection(conn, ps, rs);
         }
-          return itens;
+        return itens;
     }
-    
+
     @Override
     public void popularComDados(Pais pais, ResultSet rs) {
         try {
@@ -156,8 +152,8 @@ public class PaisDAO implements GenericoDAO<Pais> {
             pais.setCodigoISOAlph3Pais(rs.getString(2));
             pais.setNomePais(rs.getString(3));
         } catch (SQLException ex) {
-            System.out.println("Erro ao ler dados: "+ex.getMessage());
-                 }
+            System.out.println("Erro ao ler dados: " + ex.getMessage());
+        }
 
     }
 
