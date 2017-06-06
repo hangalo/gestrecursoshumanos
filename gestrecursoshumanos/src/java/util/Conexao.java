@@ -20,7 +20,7 @@ public class Conexao {
     public static Connection getConnection() {
         Connection con;
         String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/fenixschoolem";
+        String url = "jdbc:mysql://localhost:3306/gestrecursoshumanos";
         String user = "root";
         String password = "root";
         try {
