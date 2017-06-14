@@ -12,6 +12,7 @@ package modelo;
 public class Provincia {
     private Integer idProvincia;
     private String nomeProvincia;
+    private Pais paisProvincia;
     
 
     public Provincia() {
@@ -20,6 +21,7 @@ public class Provincia {
     public Provincia(Integer idProvincia, String nomeProvincia, Pais paisProvincia) {
         this.idProvincia = idProvincia;
         this.nomeProvincia = nomeProvincia;
+        this.paisProvincia = paisProvincia;
         
     }
 
@@ -38,6 +40,16 @@ public class Provincia {
     public void setNomeProvincia(String nomeProvincia) {
         this.nomeProvincia = nomeProvincia;
     }
+
+    public Pais getPaisProvincia() {
+        return paisProvincia;
+    }
+
+    public void setPaisProvincia(Pais paisProvincia) {
+        this.paisProvincia = paisProvincia;
+    }
+    
+    
 
     @Override
     public String toString() {
