@@ -71,7 +71,6 @@ public class FuncionarioDAOTest {
         System.out.println("findById");
         Integer id = 1;
         FuncionarioDAO instance = new FuncionarioDAO();
-        Funcionario expResult = null;
         Funcionario result = instance.findById(id);
         assertTrue(result!=null);
         // TODO review the generated test code and remove the default call to fail.
@@ -85,7 +84,6 @@ public class FuncionarioDAOTest {
     public void testFindAll() {
         System.out.println("findAll");
         FuncionarioDAO instance = new FuncionarioDAO();
-        List<Funcionario> expResult = null;
         List<Funcionario> result = instance.findAll();
         assertTrue(result.size()>0);
         // TODO review the generated test code and remove the default call to fail.

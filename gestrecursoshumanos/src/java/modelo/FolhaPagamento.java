@@ -24,14 +24,14 @@ public class FolhaPagamento {
     public FolhaPagamento() {
     }
 
-    public FolhaPagamento(int id_folha_pagamento, Date data_emissao, double desconto_INSS, double feriasprivate, double horas_extrasprivate, double comissaoprivate, double premiosprivate, Funcionario funcionario) {
+    public FolhaPagamento(int id_folha_pagamento, Date data_emissao, double desconto_INSS, double ferias, double horas_extras, double comissao, double premios, Funcionario funcionario) {
         this.id_folha_pagamento = id_folha_pagamento;
         this.data_emissao = data_emissao;
         this.desconto_INSS = desconto_INSS;
-        this.ferias = feriasprivate;
-        this.horas_extras = horas_extrasprivate;
-        this.comissao = comissaoprivate;
-        this.premios = premiosprivate;
+        this.ferias = ferias;
+        this.horas_extras = horas_extras;
+        this.comissao = comissao;
+        this.premios = premios;
         this.funcionario = funcionario;
     }
 
@@ -80,57 +80,57 @@ public class FolhaPagamento {
     /**
      * @return the ferias
      */
-    public double getFeriasprivate() {
+    public double getFerias() {
         return ferias;
     }
 
     /**
-     * @param feriasprivate the ferias to set
+     * @param ferias the ferias to set
      */
-    public void setFeriasprivate(double feriasprivate) {
-        this.ferias = feriasprivate;
+    public void setFerias(double ferias) {
+        this.ferias = ferias;
     }
 
     /**
      * @return the horas_extras
      */
-    public double getHoras_extrasprivate() {
+    public double getHoras_extras() {
         return horas_extras;
     }
 
     /**
-     * @param horas_extrasprivate the horas_extras to set
+     * @param horas_extras the horas_extras to set
      */
-    public void setHoras_extrasprivate(double horas_extrasprivate) {
-        this.horas_extras = horas_extrasprivate;
+    public void setHoras_extras(double horas_extras) {
+        this.horas_extras = horas_extras;
     }
 
     /**
      * @return the comissao
      */
-    public double getComissaoprivate() {
+    public double getComissao() {
         return comissao;
     }
 
     /**
-     * @param comissaoprivate the comissao to set
+     * @param comissao the comissao to set
      */
-    public void setComissaoprivate(double comissaoprivate) {
-        this.comissao = comissaoprivate;
+    public void setComissao(double comissao) {
+        this.comissao = comissao;
     }
 
     /**
      * @return the premios
      */
-    public double getPremiosprivate() {
+    public double getPremios() {
         return premios;
     }
 
     /**
-     * @param premiosprivate the premios to set
+     * @param premios the premios to set
      */
-    public void setPremiosprivate(double premiosprivate) {
-        this.premios = premiosprivate;
+    public void setPremios(double premios) {
+        this.premios = premios;
     }
 
     /**

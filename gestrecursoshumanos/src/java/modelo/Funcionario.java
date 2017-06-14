@@ -35,7 +35,11 @@ public class Funcionario {
 
     public Funcionario() {
     }
-
+    
+    public Funcionario(int id) {
+        this.idFuncionario = id;
+    }
+    
     public Funcionario(int idFuncionario, String primeiroNomeFuncionario, String segundoNomeFuncionario, String ultimoNomeFuncionario, String alcunhaFuncionario, Date dataNascimentoFuncionario, Blob fotoFuncionario, String urlFotoFuncionario, String telefoneFuncionario, String telemovelPrinciapal, String telemovelSecundario, String emailPrincipal, String emailSecundario, String casaFuncionario, String ruaFuncionario, String bairroFuncionario, Municipio municipio) {
         this.idFuncionario = idFuncionario;
         this.primeiroNomeFuncionario = primeiroNomeFuncionario;
