@@ -96,7 +96,7 @@ public class EmpresaDAOTest {
         EmpresaDAO instance = new EmpresaDAO();
         //List<Empresa> expResult = null;
         List<Empresa> result = instance.findAll();
-        assertTrue(result.size() > 0);
+        assertTrue(result.size()>0);
     }
     
 }
