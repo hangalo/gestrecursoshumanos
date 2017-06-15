@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package modelo;
+import java.sql.Blob;
 import java.sql.Date;
 /**
  *
@@ -16,8 +17,8 @@ public class Candidato {
     private String segundoNomeCandidato;
     private String ultimoNomeFuncionario;
     private String alcunhaFuncionario;
-    private String foto_candidato;
-    private String url_foto_candidato;
+    private Blob fotoCandidato;
+    private String urlFotoCandidato;
     private Date dataNascimentoCandidato;
     private String telefoneFixo;
     private String telemovelPrincipal;
@@ -32,13 +33,13 @@ public class Candidato {
     
 //construtor vazio para inicializar os atributos da classe
     public Candidato() {
-        this(0, "", "", "", "", "", "", null, "", "", "", "", "", "", "", "", null);
+        this(0, "", "", "", "", null, "", null, "", "", "", "", "", "", "", "", null);
     }
 //Declaraco do segundo construtor que atribui os valor que recebe aos atributos
 
     public Candidato(int idCandidato, String primeiroNomeCandidato, 
             String segundoNomeCandidato, String ultimoNomeFuncionario, 
-            String alcunhaFuncionario, String foto_candidato, String url_foto_candidato, 
+            String alcunhaFuncionario, Blob fotoCandidato, String urlFotoCandidato, 
             Date dataNascimentoCandidato, String telefoneFixo, String telemovelPrincipal, 
             String telemovelSecundario, String emailPrincipal, String emailSecundario, 
             String casaCandidato, String ruaFuncionario, String bairroCandidato, 
@@ -49,8 +50,8 @@ public class Candidato {
         this.segundoNomeCandidato = segundoNomeCandidato;
         this.ultimoNomeFuncionario = ultimoNomeFuncionario;
         this.alcunhaFuncionario = alcunhaFuncionario;
-        this.foto_candidato = foto_candidato;
-        this.url_foto_candidato = url_foto_candidato;
+        this.fotoCandidato = fotoCandidato;
+        this.urlFotoCandidato = urlFotoCandidato;
         this.dataNascimentoCandidato = dataNascimentoCandidato;
         this.telefoneFixo = telefoneFixo;
         this.telemovelPrincipal = telemovelPrincipal;
@@ -105,20 +106,20 @@ public class Candidato {
         this.alcunhaFuncionario = alcunhaFuncionario;
     }
 
-    public String getFotoCandidato() {
-        return foto_candidato;
+    public Blob getFotoCandidato() {
+        return fotoCandidato;
     }
 
-    public void setFotoCandidato(String foto_candidato) {
-        this.foto_candidato = foto_candidato;
+    public void setFotoCandidato(Blob fotoCandidato) {
+        this.fotoCandidato = fotoCandidato;
     }
 
     public String getUrlFotoCandidato() {
-        return url_foto_candidato;
+        return urlFotoCandidato;
     }
 
-    public void setUrlFotoCandidato(String url_foto_candidato) {
-        this.url_foto_candidato = url_foto_candidato;
+    public void setUrlFotoCandidato(String urlFotoCandidato) {
+        this.urlFotoCandidato = urlFotoCandidato;
     }
 
     public java.sql.Date getDataNascimentoCandidato() {
