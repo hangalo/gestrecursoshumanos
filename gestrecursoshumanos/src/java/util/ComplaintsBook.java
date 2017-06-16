@@ -19,4 +19,19 @@
  * Todas as entradas neste ficheiro poderão ser respondidas por qualquer individuo do grupo
  * Assim que uma entrada for revisada devera ser removida deste ficheiro de modo a manter apenas 
  * entradas não revisadas
+ * 
+ * Guadar imagens
+ * 
+ * Ver na pagina 87 do manual
+ * 
+ * As variaveis devem ser declaradas da seguinte torma
+ * 
+ * private byte [] ficheiro
+ * private String URLFicheiro;
+ * 
+ *  uma para guardar os bytes do ficheiro
+ * outra o nome para eventual manipulação via url (localizacao externa do ficheiro)
+ * 
+ * 
+ * 
  */

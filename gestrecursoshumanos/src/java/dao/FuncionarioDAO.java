@@ -36,11 +36,15 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM funcionario where id_funcionario = ?";
     private static final String LISTAR_TUDO = "SELECT * FROM funcionario ORDER BY primeiro_nome_funcionario";
     
+     PreparedStatement ps;
+    Connection conn;
+    ResultSet rs;
+    
+    
     //Salva Funcionario na BD
     @Override
     public void save(Funcionario funcionario){
-        PreparedStatement ps = null;
-        Connection conn = null;
+      
 
         if (funcionario == null) {
             System.err.println("O valor passado não pode ser nulo!");
@@ -78,8 +82,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
     //actualiza Funcionario na BD
     @Override
     public void update(Funcionario funcionario){
-        PreparedStatement ps = null;
-        Connection conn = null;
+        
 
         if (funcionario == null) {
             System.err.println("O valor passado não pode ser nulo!");
@@ -118,8 +121,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
     //elimina Funcionario na BD
     @Override
     public void delete(Funcionario funcionario){
-        PreparedStatement ps = null;
-        Connection conn = null;
+      
         if (funcionario == null) {
             System.err.println("O valor passado nao pode ser nulo");
         }
@@ -138,9 +140,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
     //procura um determinado Funcionario na BD
     @Override
     public Funcionario findById(Integer id){
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet rs = null;
+       
         Funcionario funcionario = new Funcionario();
         try {
             conn = Conexao.getConnection();
@@ -162,9 +162,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
     
     @Override
     public List<Funcionario> findAll(){
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet rs = null;
+      
         List<Funcionario> funcionarios = new ArrayList<>();
         try {
             conn = Conexao.getConnection();
@@ -178,7 +176,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
         } catch (SQLException ex) {
             System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
         } finally {
-            Conexao.closeConnection(conn);
+            Conexao.closeConnection(conn, ps, rs);
         }
         return funcionarios;
     }
