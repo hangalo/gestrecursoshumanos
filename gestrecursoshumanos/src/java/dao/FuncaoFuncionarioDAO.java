@@ -79,8 +79,6 @@ public class FuncaoFuncionarioDAO implements GenericoDAO<FuncaoFuncionario> {
             System.err.println("Erro ao eliminar dados: " + ex.getLocalizedMessage());
         } finally {
             Conexao.closeConnection(conn, ps);
-            {
-            }
         }
     }
 
