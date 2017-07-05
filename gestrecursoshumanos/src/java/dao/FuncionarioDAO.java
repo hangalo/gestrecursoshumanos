@@ -59,7 +59,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
             ps.setString(3, funcionario.getUltimoNomeFuncionario());
             ps.setString(4, funcionario.getAlcunhaFuncionario());
             ps.setDate(5, funcionario.getDataNascimentoFuncionario());
-            ps.setBlob(6, funcionario.getFotoFuncionario());
+            ps.setBytes(6, funcionario.getFotoFuncionario());
             ps.setString(7, funcionario.getUrlFotoFuncionario());
             ps.setString(8, funcionario.getTelefoneFuncionario());
             ps.setString(9, funcionario.getTelemovelPrinciapal());
@@ -97,7 +97,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
             ps.setString(3, funcionario.getUltimoNomeFuncionario());
             ps.setString(4, funcionario.getAlcunhaFuncionario());
             ps.setDate(5, funcionario.getDataNascimentoFuncionario());
-            ps.setBlob(6, funcionario.getFotoFuncionario());
+            ps.setBytes(6, funcionario.getFotoFuncionario());
             ps.setString(7, funcionario.getUrlFotoFuncionario());
             ps.setString(8, funcionario.getTelefoneFuncionario());
             ps.setString(9, funcionario.getTelemovelPrinciapal());
@@ -190,7 +190,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
              funcionario.setUltimoNomeFuncionario(rs.getString("ultimo_nome_funcionario"));
              funcionario.setAlcunhaFuncionario(rs.getString("alcunha_funcionario"));
              funcionario.setDataNascimentoFuncionario(rs.getDate("data_nascimento_funcionario"));
-             funcionario.setFotoFuncionario(rs.getBlob("foto_funcionario"));
+             funcionario.setFotoFuncionario(rs.getBytes("foto_funcionario"));
              funcionario.setUrlFotoFuncionario(rs.getString("url_foto_funcionario"));
              funcionario.setTelefoneFuncionario(rs.getString("telefone_funcionario"));
              funcionario.setTelemovelPrinciapal(rs.getString("telemovel_princiapal"));
