@@ -32,8 +32,7 @@ public class Empresa {
     private String fax_principal;
     private String fax_secundario;
 
-    public Empresa() {
-    }
+    public Empresa() {}
 
     public Empresa(Integer id_empresa, String nome_empresa, String sigla_empresa, String logo_empresa, String url_logo_empresa, Date data_cricacao, String casa_empresa, String rua_empresa, String bairro_empresa, String distrito_empresa, String home_page, String email_princiapal, String telefone_princiapl, String telefone_secundario, String telemovel_principal, String telemovel_secundario, String fax_principal, String fax_secundario) {
         this.id_empresa = id_empresa;

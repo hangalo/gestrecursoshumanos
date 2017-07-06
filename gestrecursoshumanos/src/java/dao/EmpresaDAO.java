@@ -20,13 +20,13 @@ import util.Conexao;
  */
 public class EmpresaDAO implements GenericoDAO<Empresa> {
 
-    private static final String INSERIR = "INSERT INTO Empresa(nome_empresa,logo_empresa,"
+    private static final String INSERIR = "INSERT INTO empresa(nome_empresa,sigla_empresa,"
             + "url_logo_empresa,data_cricacao,casa_empresa,rua_empresa,"
             + "bairro_empresa,distrito_empresa,home_page,email_princiapal,"
             + "telefone_princiapl,telefone_secundario,telemovel_principal,"
             + "telemovel_secundario,fax_principal,fax_secundario) "
             + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String ACTUALIZAR = "UPDATE Empresa set nome_empresa = ?, sigla_empresa = ?,"
+    private static final String ACTUALIZAR = "UPDATE empresa set nome_empresa = ?, sigla_empresa = ?,"
             + " logo_empresa = ?, url_logo_empresa = ?, "
             + "data_cricacao = ?, casa_empresa = ?, rua_empresa = ?,bairro_empresa = ?,"
             + " distrito_empresa = ?, home_page = ?, "
@@ -34,9 +34,9 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             + " telefone_secundario = ?, telemovel_principal = ?, "
             + "telemovel_secundario = ?, fax_principal = ?, "
             + "fax_secundario = ? WHERE id_empresa = ?";
-    private static final String ELIMINAR = "DELETE FROM Empresa WHERE id_empresa = ?";
-    private static final String BUSCAR_POR_CODIGO = "SELECT * FROM Empresa where id_empresa = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM Empresa ORDER BY nome_empresa";
+    private static final String ELIMINAR = "DELETE FROM empresa WHERE id_empresa = ?";
+    private static final String BUSCAR_POR_CODIGO = "SELECT * FROM empresa where id_empresa = ?";
+    private static final String LISTAR_TUDO = "SELECT * FROM empresa ORDER BY nome_empresa";
 
     @Override
     public void save(Empresa empresa) {
