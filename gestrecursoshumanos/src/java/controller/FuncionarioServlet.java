@@ -8,7 +8,9 @@ package controller;
 import dao.FuncionarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import modelo.Funcionario;
  * @author Viv Mendes
  */
 @WebServlet(name = "FuncionarioServlet", urlPatterns = {"/funcionarioServlet"})
+@MultipartConfig(maxFileSize = 16177215) // tamanho maximo do ficheiro 16 MB
 public class FuncionarioServlet extends HttpServlet {
 
     FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
@@ -28,9 +31,12 @@ public class FuncionarioServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        funcionario.setPrimeiroNomeFuncionario(request.getParameter("fpnome"));
+        funcionario.setPrimeiroNomeFuncionario(request.getParameter("fpnome") + "Viv");
         funcionario.setSegundoNomeFuncionario(request.getParameter("fsnome"));
-        funcionarioDAO.save(funcionario);
+        
+        request.setAttribute("resposta", funcionario);
+        RequestDispatcher rd = request.getRequestDispatcher("/paginas/cadastro_result.jsp");
+        rd.forward(request, response);
     }
 
     

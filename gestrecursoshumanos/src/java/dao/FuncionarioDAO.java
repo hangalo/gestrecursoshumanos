@@ -35,6 +35,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
     private static final String ELIMINAR = "DELETE FROM funcionario WHERE id_funcionario = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM funcionario where id_funcionario = ?";
     private static final String LISTAR_TUDO = "SELECT * FROM funcionario ORDER BY primeiro_nome_funcionario";
+    private static final String BUSCAR_IMAGEM_POR_CODIGO = "SELECT foto_funcionario FROM funcionario where id_funcionario = ?";
     
      PreparedStatement ps;
     Connection conn;
@@ -205,5 +206,26 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
         } catch (SQLException ex) {
             System.err.println("Erro ao carregar dados: " + ex.getLocalizedMessage());
         }
+    }
+    
+    public byte[] recuperarImagem(Integer id) {
+        byte[] imagem = null;
+        PreparedStatement ps;
+        Connection conn = null;
+        ResultSet rs;
+        try {
+            conn = Conexao.getConnection();
+            ps = conn.prepareStatement(BUSCAR_IMAGEM_POR_CODIGO);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                imagem = rs.getBytes("foto_funcionario");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
+        } finally {
+            Conexao.closeConnection(conn);
+        }
+        return imagem;
     }
 }
