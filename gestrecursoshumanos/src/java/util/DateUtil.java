@@ -39,6 +39,5 @@ public class DateUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         calendar.setTime(data);
         return sdf.format(calendar.getTime());
-
     }
 }

@@ -4,6 +4,8 @@
     Author     : praveen
 --%>
 
+<%@ page import="java.sql.*"%>
+<% Class.forName("com.mysql.jdbc.Driver"); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -43,7 +45,7 @@
 <div class="jumbotron text-center">
      
             <h3>Gestao de Recursos Humanso</h3>
-            <a href="#" class="btn btn-info" role="button">Entrar</a>
+            <a href="paginas/empresa_save.jsp" class="btn btn-info" role="button">Entrar</a>
         </div>
     </body>
 </html>

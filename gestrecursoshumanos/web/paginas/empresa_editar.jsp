@@ -1,34 +1,36 @@
 <%-- 
-    Document   : empresa
-    Created on : Jul 4, 2017, 6:49:08 AM
+    Document   : empresa_editar
+    Created on : Jul 12, 2017, 3:48:17 AM
     Author     : FranciscoMiguel
 --%>
 
+<%@page import="modelo.Empresa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
-        <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-        <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js"></script>
-        <title>JSP Page</title>
+
     </head>
+
     <body>
+        <%
+            Empresa empresa = (Empresa) request.getAttribute("empresa");
+        %>
+        
         <div class="container">
-            <h3 style="text-align: center">Ficha de Registo da Empresa</h3>
+            <h3 style="text-align: center">Ficha de Alteracao Da Empresa</h3>
             <br/>
             <form class="form-horizontal" role="form" action="" method="POST">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Nome:</label>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="nome_empresa" nam
-                               e="nome_empresa"/>
+                        <input type="text" class="form-control" id="nome_empresa" name="nome_empresa" value="<%=empresa.getNome_empresa()%>"/>
                     </div>
                 </div>
 
 
-
+                
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Url:</label>
                     <div class="col-xs-4">
@@ -128,8 +130,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-md-offset-2">
-                    <button type="submit" class="btn btn-primary" >Guardar</button>
-                    <button type="submit" class="btn btn-primary" >Fechar</button>
+                    <button type="submit" class="btn btn-primary" >Alterar</button>
                 </div>
             </form>     
         </div>

@@ -25,7 +25,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             + "bairro_empresa,distrito_empresa,home_page,email_princiapal,"
             + "telefone_princiapl,telefone_secundario,telemovel_principal,"
             + "telemovel_secundario,fax_principal,fax_secundario) "
-            + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String ACTUALIZAR = "UPDATE empresa set nome_empresa = ?, sigla_empresa = ?,"
             + " logo_empresa = ?, url_logo_empresa = ?, "
             + "data_cricacao = ?, casa_empresa = ?, rua_empresa = ?,bairro_empresa = ?,"
