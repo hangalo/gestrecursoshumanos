@@ -40,4 +40,12 @@ public class DateUtil {
         calendar.setTime(data);
         return sdf.format(calendar.getTime());
     }
+    
+     public static String getDataActual (){
+        String dataString = "";
+        Date data = new Date (System.currentTimeMillis());
+        SimpleDateFormat formatDate = new SimpleDateFormat ("dd/MM/yyyy");
+        dataString += formatDate.format(data);
+        return dataString;
+    }
 }

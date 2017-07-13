@@ -3,6 +3,7 @@
     Created on : Jul 10, 2017, 2:33:01 AM
     Author     : FranciscoMiguel
 --%>
+<%@page import="util.DateUtil"%>
 <%@page import="modelo.*" %>
 <%@page import="dao.*" %>
 <%@page import="java.util.List" %>
@@ -24,6 +25,19 @@
                     <input type="text" class="form-control" id="nome_empresa" name="nome_empresa"/>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">Logo</label>
+                <div class="col-xs-4" >
+                    <input type="file" class="form-control" id="logo_empresa" 
+                           name="logo_empresa"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">Sigla</label>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" id="sigla_empresa" name="sigla_empresa"/>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-xs-3 control-label">Url:</label>
@@ -34,7 +48,11 @@
             <div class="form-group">
                 <label class="col-xs-3 control-label">Data De Criação</label>
                 <div class="col-xs-4" >
-                    <input type="date" class="form-control" id="data_cricacao" name="data_cricacao" placeholder="dd/MM/yyyy"/>
+                    <%
+                        DateUtil dateUtil = new DateUtil();
+                    %>
+                    <input type="date" class="form-control" id="data_cricacao" name="data_cricacao" placeholder="dd/MM/yyyy"
+                           value="<%= dateUtil.getDataActual()%>" readonly="readonly"/>
                 </div>
             </div>
             <div class="form-group">

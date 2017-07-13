@@ -32,8 +32,8 @@ public class EmpresaServlet extends HttpServlet {
         }
         EmpresaDAO empresaDao = new EmpresaDAO();
         Empresa empresa = new Empresa();
-        
-        if (comando == null || !comando.equalsIgnoreCase("principal")) {
+
+        if (!comando.equalsIgnoreCase("principal")) {
             try {
 
                 String idEmpresa = request.getParameter("id_empresa");
@@ -48,13 +48,14 @@ public class EmpresaServlet extends HttpServlet {
 
             if (comando.equalsIgnoreCase("guardar")) {
                 empresa.setNome_empresa(request.getParameter("nome_empresa"));
-                empresa.setCasa_empresa(request.getParameter("casa_empresa"));
+                empresa.setSigla_empresa(request.getParameter("sigla_empresa"));
                 empresa.setLogo_empresa(request.getParameter("logo_empresa"));
                 empresa.setRua_empresa(request.getParameter("rua_empresa"));
+                empresa.setCasa_empresa(request.getParameter("casa_empresa"));
                 empresa.setUrl_logo_empresa(request.getParameter("url_logo_empresa"));
                 empresa.setSigla_empresa(request.getParameter("sigla_empresa"));
-                //java.sql.Date date = new java.sql.Date(dateUtil.strToDate(request.getParameter("data_cricacao")).getTime());
-                //empresa.setData_cricacao( date );
+                java.sql.Date date = new java.sql.Date(dateUtil.strToDate(request.getParameter("data_cricacao")).getTime());
+                empresa.setData_cricacao(date);
                 empresa.setBairro_empresa(request.getParameter("bairro_empresa"));
                 empresa.setDistrito_empresa(request.getParameter("distrito_empresa"));
                 empresa.setHome_page(request.getParameter("home_page"));
@@ -62,7 +63,7 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setTelefone_princiapl(request.getParameter("telefone_princiapl"));
                 empresa.setTelefone_secundario(request.getParameter("telefone_secundario"));
                 empresa.setTelemovel_principal(request.getParameter("telemovel_principal"));
-                empresa.setTelefone_secundario(request.getParameter("telemovel_secundario"));
+                empresa.setTelemovel_secundario(request.getParameter("telemovel_secundario"));
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
                 empresaDao.save(empresa);
@@ -75,7 +76,8 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setRua_empresa(request.getParameter("rua_empresa"));
                 empresa.setUrl_logo_empresa(request.getParameter("url_logo_empresa"));
                 empresa.setSigla_empresa(request.getParameter("sigla_empresa"));
-                empresa.setData_cricacao((java.sql.Date) dateUtil.strToDate(request.getParameter("data_cricacao")));
+                java.sql.Date date = new java.sql.Date(dateUtil.strToDate(request.getParameter("data_cricacao")).getTime());
+                empresa.setData_cricacao(date);
                 empresa.setBairro_empresa(request.getParameter("bairro_empresa"));
                 empresa.setDistrito_empresa(request.getParameter("distrito_empresa"));
                 empresa.setHome_page(request.getParameter("home_page"));
@@ -83,9 +85,10 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setTelefone_princiapl(request.getParameter("telefone_princiapl"));
                 empresa.setTelefone_secundario(request.getParameter("telefone_secundario"));
                 empresa.setTelemovel_principal(request.getParameter("telemovel_principal"));
-                empresa.setTelefone_secundario(request.getParameter("telemovel_secundario"));
+                empresa.setTelemovel_secundario(request.getParameter("telemovel_secundario"));
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
+                empresaDao.update(empresa);
                 response.sendRedirect("paginas/empresa_listar.jsp");
             } else if (comando.equalsIgnoreCase("eliminar")) {
                 empresaDao.delete(empresa);
@@ -93,7 +96,7 @@ public class EmpresaServlet extends HttpServlet {
             } else if (comando.equalsIgnoreCase("prepara_editar")) {
                 empresa = empresaDao.findById(empresa.getId_empresa());
                 request.setAttribute("empresa", empresa);
-                RequestDispatcher rd = request.getRequestDispatcher("/paginas/empresa_editar.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("paginas/empresa_editar.jsp");
                 rd.forward(request, response);
             } else if (comando.equalsIgnoreCase("listar")) {
                 response.sendRedirect("paginas/empresa_listar.jsp");

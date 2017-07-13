@@ -36,7 +36,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             + "fax_secundario = ? WHERE id_empresa = ?";
     private static final String ELIMINAR = "DELETE FROM empresa WHERE id_empresa = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM empresa where id_empresa = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM empresa ORDER BY nome_empresa";
+    private static final String LISTAR_TUDO = "SELECT * FROM empresa ORDER BY id_empresa";
 
     @Override
     public void save(Empresa empresa) {
@@ -57,7 +57,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
             ps.setString(1, empresa.getNome_empresa());
             //ps.setBlob(2, b ); 7777777777777777777
-            ps.setString(2, empresa.getLogo_empresa());
+            ps.setString(2, empresa.getSigla_empresa());
             ps.setString(3, empresa.getUrl_logo_empresa());
             ps.setDate(4, empresa.getData_cricacao());
             ps.setString(5, empresa.getCasa_empresa());
@@ -154,6 +154,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             empresa.setLogo_empresa(rs.getString("logo_empresa"));
             empresa.setUrl_logo_empresa(rs.getString("url_logo_empresa"));
             empresa.setData_cricacao(rs.getDate("data_cricacao"));
+            empresa.setCasa_empresa(rs.getString("casa_empresa"));
             empresa.setRua_empresa(rs.getString("rua_empresa"));
             empresa.setBairro_empresa(rs.getString("bairro_empresa"));
             empresa.setDistrito_empresa(rs.getString("distrito_empresa"));
