@@ -45,7 +45,7 @@
 <div class="jumbotron text-center">
      
             <h3>Gestao de Recursos Humanso</h3>
-            <a href="paginas/empresa_listar.jsp" class="btn btn-info" role="button">Entrar</a>
+            <a href="" class="btn btn-info" role="button">Entrar</a>
         </div>
     </body>
 </html>
