@@ -13,14 +13,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lista de Candidatos</title>
+        <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
+        <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js"></script>
     </head>
     <body>
          <%
             CandidatoDAO candidatoDAO = new CandidatoDAO();
             List<Candidato> candidatos = candidatoDAO.findAll();
         %>
-        
-        <table class=" table table-hover">
+        <div class="table-hover">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -71,5 +74,6 @@
                 <%}%>
             </tbody>
         </table>
+        </div>
     </body>
 </html>

@@ -119,8 +119,18 @@
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Municipio:</label>
+                    <%
+                        MunicipioDAO municipioDAO = new MunicipioDAO();
+                        List<Municipio> municipios = municipioDAO.findAll();
+                    %>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="municipioCandidato" name="municipioCandidato"/>
+                        <select class="form-control" id="municipioCandidato" name="municipioCandidato">
+                        <%for (Municipio municipio : municipios) {%>
+                        <option>
+                            <%=municipio.getIdMunicipio() + " " + municipio.getNomeMunicipio()%>
+                        </option> 
+                        <%}%>
+                        </select>
                     </div>
                 </div>
                

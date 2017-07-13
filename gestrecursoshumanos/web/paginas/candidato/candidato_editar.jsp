@@ -14,6 +14,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alterar Candidato</title>
+        <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
+        <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js"></script>
     </head>
     <body>
         <%
@@ -127,6 +130,7 @@
                     </div>
                 </div>
                 <div class="form-group">
+               
                     <label class="col-xs-3 control-label">Municipio:</label>
                     <div class="col-xs-4">
                         <input value="<%=candidato.getMunicipioCandidato().getNomeMunicipio()%>" type="text" class="form-control" id="municipioCandidato" name="municipioCandidato"/>
