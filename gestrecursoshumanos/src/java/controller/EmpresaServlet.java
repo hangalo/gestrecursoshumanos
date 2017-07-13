@@ -67,7 +67,7 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
                 empresaDao.save(empresa);
-                response.sendRedirect("paginas/empresa_save.jsp");
+                response.sendRedirect("paginas/empresa/empresa_save.jsp");
             } else if (comando.equalsIgnoreCase("editar")) {
                 empresa.setId_empresa(Integer.parseInt(request.getParameter("id_empresa")));
                 empresa.setNome_empresa(request.getParameter("nome_empresa"));
@@ -89,17 +89,17 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
                 empresaDao.update(empresa);
-                response.sendRedirect("paginas/empresa_listar.jsp");
+                response.sendRedirect("paginas/empresa/empresa_listar.jsp");
             } else if (comando.equalsIgnoreCase("eliminar")) {
                 empresaDao.delete(empresa);
-                response.sendRedirect("paginas/empresa_listar.jsp");
+                response.sendRedirect("paginas/empresa/empresa_listar.jsp");
             } else if (comando.equalsIgnoreCase("prepara_editar")) {
                 empresa = empresaDao.findById(empresa.getId_empresa());
                 request.setAttribute("empresa", empresa);
-                RequestDispatcher rd = request.getRequestDispatcher("paginas/empresa_editar.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("paginas/empresa/empresa_editar.jsp");
                 rd.forward(request, response);
             } else if (comando.equalsIgnoreCase("listar")) {
-                response.sendRedirect("paginas/empresa_listar.jsp");
+                response.sendRedirect("paginas/empresa/empresa_listar.jsp");
             } else if (comando.equalsIgnoreCase("principal")) {
                 response.sendRedirect("/index.jsp");
             }

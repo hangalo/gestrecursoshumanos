@@ -18,7 +18,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form class="form-horizontal" role="form" action="../empresaServlet?comando=guardar" method="POST">
+        <form class="form-horizontal" role="form" action="<%=request.getContextPath()%>/empresaServlet?comando=guardar" method="POST">
             <div class="form-group">
                 <label class="col-xs-3 control-label">Nome:</label>
                 <div class="col-xs-4">

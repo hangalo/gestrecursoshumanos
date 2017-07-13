@@ -67,9 +67,9 @@
                 </tr>
 
             <td><a href="<%=request.getContextPath()%>/empresaServlet?comando=prepara_editar&id_empresa=<%=empresa.getId_empresa()%>">
-                    <img src="../imagens/edit.png" /></a></td>
+                    <img src="<%=request.getContextPath()%>/imagens/edit.png" /></a></td>
             <td><a href="<%=request.getContextPath()%>/empresaServlet?comando=eliminar&id_empresa=<%=empresa.getId_empresa()%>">
-                    <img src="../imagens/delete.png" /></a></td>
+                    <img src="<%=request.getContextPath()%>/imagens/delete.png" /></a></td>
             <%}%>
         </tbody>
     </table>
