@@ -30,17 +30,19 @@ public class FolhaPagamentoDAO implements GenericoDAO<FolhaPagamento> {
     private static final String ELIMINAR = "DELETE FROM folha_pagamento WHERE id_folha_pagamento = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM folha_pagamento where id_folha_pagamento = ?";
     private static final String LISTAR_TUDO = "SELECT * FROM folha_pagamento ORDER BY data_emissao";
+     PreparedStatement ps;
+    Connection conn;
+    ResultSet rs;
     
     @Override
     public void save(FolhaPagamento folhaPagamento) {
-        PreparedStatement ps = null;
-        Connection conn = null;
+       
 
         if (folhaPagamento == null) {
             System.err.println("O valor passado não pode ser nulo!");
         }
         try {
-            conn = Conexao.getConnection();
+          conn = Conexao.getConnection();
             ps = conn.prepareStatement(INSERIR);
             ps.setDate(1, folhaPagamento.getData_emissao());
             ps.setDouble(2, folhaPagamento.getDesconto_INSS());
@@ -61,8 +63,7 @@ public class FolhaPagamentoDAO implements GenericoDAO<FolhaPagamento> {
 
     @Override
     public void update(FolhaPagamento folhaPagamento) {
-        PreparedStatement ps = null;
-        Connection conn = null;
+       
 
         if (folhaPagamento == null) {
             System.err.println("O valor passado não pode ser nulo!");
@@ -90,8 +91,7 @@ public class FolhaPagamentoDAO implements GenericoDAO<FolhaPagamento> {
 
     @Override
     public void delete(FolhaPagamento folhaPagamento) {
-        PreparedStatement ps = null;
-        Connection conn = null;
+        
         if (folhaPagamento == null) {
             System.err.println("O valor passado nao pode ser nulo");
         }
@@ -109,9 +109,7 @@ public class FolhaPagamentoDAO implements GenericoDAO<FolhaPagamento> {
 
     @Override
     public FolhaPagamento findById(Integer id) {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet rs = null;
+       
         FolhaPagamento folhaPagamento = new FolhaPagamento();
         try {
             conn = Conexao.getConnection();
@@ -133,9 +131,7 @@ public class FolhaPagamentoDAO implements GenericoDAO<FolhaPagamento> {
 
     @Override
     public List<FolhaPagamento> findAll() {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet rs = null;
+        
         List<FolhaPagamento> folhasPagamentos = new ArrayList<>();
         try {
             conn = Conexao.getConnection();
@@ -149,7 +145,7 @@ public class FolhaPagamentoDAO implements GenericoDAO<FolhaPagamento> {
         } catch (SQLException ex) {
             System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
         } finally {
-            Conexao.closeConnection(conn);
+            Conexao.closeConnection(conn, ps, rs);
         }
         return folhasPagamentos;
     }

@@ -5,8 +5,6 @@
  */
 package modelo;
 
-import java.awt.image.BufferedImage;
-import java.sql.Blob;
 import java.sql.Date;
 
 /**
@@ -21,7 +19,7 @@ public class Funcionario {
     private String ultimoNomeFuncionario;
     private String alcunhaFuncionario;
     private Date dataNascimentoFuncionario;
-    private Blob fotoFuncionario;
+    private byte[] fotoFuncionario;
     private String urlFotoFuncionario;
     private String telefoneFuncionario;
     private String telemovelPrinciapal;
@@ -40,7 +38,7 @@ public class Funcionario {
         this.idFuncionario = id;
     }
     
-    public Funcionario(int idFuncionario, String primeiroNomeFuncionario, String segundoNomeFuncionario, String ultimoNomeFuncionario, String alcunhaFuncionario, Date dataNascimentoFuncionario, Blob fotoFuncionario, String urlFotoFuncionario, String telefoneFuncionario, String telemovelPrinciapal, String telemovelSecundario, String emailPrincipal, String emailSecundario, String casaFuncionario, String ruaFuncionario, String bairroFuncionario, Municipio municipio) {
+    public Funcionario(int idFuncionario, String primeiroNomeFuncionario, String segundoNomeFuncionario, String ultimoNomeFuncionario, String alcunhaFuncionario, Date dataNascimentoFuncionario, byte[] fotoFuncionario, String urlFotoFuncionario, String telefoneFuncionario, String telemovelPrinciapal, String telemovelSecundario, String emailPrincipal, String emailSecundario, String casaFuncionario, String ruaFuncionario, String bairroFuncionario, Municipio municipio) {
         this.idFuncionario = idFuncionario;
         this.primeiroNomeFuncionario = primeiroNomeFuncionario;
         this.segundoNomeFuncionario = segundoNomeFuncionario;
@@ -147,14 +145,14 @@ public class Funcionario {
     /**
      * @return the fotoFuncionario
      */
-    public Blob getFotoFuncionario() {
+    public byte[] getFotoFuncionario() {
         return fotoFuncionario;
     }
 
     /**
      * @param fotoFuncionario the fotoFuncionario to set
      */
-    public void setFotoFuncionario(Blob fotoFuncionario) {
+    public void setFotoFuncionario(byte[] fotoFuncionario) {
         this.fotoFuncionario = fotoFuncionario;
     }
 

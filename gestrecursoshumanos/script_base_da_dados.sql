@@ -124,7 +124,10 @@ CREATE TABLE `empresa` (
   `telemovel_secundario` varchar(45) DEFAULT NULL,
   `fax_principal` varchar(45) DEFAULT NULL,
   `fax_secundario` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_empresa`)
+  `id_municipio` int(11) NOT NULL,
+  PRIMARY KEY (`id_empresa`),
+  KEY `fk_empresa_municipio1_idx` (`id_municipio`),
+  CONSTRAINT `fk_empresa_municipio1` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id_municipio`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

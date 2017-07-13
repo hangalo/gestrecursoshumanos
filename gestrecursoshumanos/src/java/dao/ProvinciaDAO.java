@@ -26,6 +26,9 @@ public class ProvinciaDAO implements GenericoDAO<Provincia> {
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM Provincia where id_Provincia = ?";
     private static final String LISTAR_TUDO = "SELECT * FROM Provincia ORDER BY nome_provincia ASC;";
 
+     PreparedStatement ps;
+    Connection conn;
+    ResultSet rs;
     @Override
     public void save(Provincia provincia) {
         PreparedStatement ps = null;
@@ -71,8 +74,7 @@ public class ProvinciaDAO implements GenericoDAO<Provincia> {
 
     @Override
     public void delete(Provincia provincia) {
-        PreparedStatement ps = null;
-        Connection conn = null;
+       
         if (provincia == null) {
             System.err.println("O valor passado nao pode ser nulo");
         }
@@ -92,10 +94,7 @@ public class ProvinciaDAO implements GenericoDAO<Provincia> {
 
     @Override
     public Provincia findById(Integer id) {
-
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet rs = null;
+        
         Provincia provincia = new Provincia();
         try {
             conn = Conexao.getConnection();
@@ -116,9 +115,7 @@ public class ProvinciaDAO implements GenericoDAO<Provincia> {
 
     @Override
     public List<Provincia> findAll() {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet rs = null;
+       
         List<Provincia> provincias = new ArrayList<>();
         try {
             conn = Conexao.getConnection();
@@ -132,7 +129,7 @@ public class ProvinciaDAO implements GenericoDAO<Provincia> {
         } catch (SQLException ex) {
             System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
         } finally {
-            Conexao.closeConnection(conn);
+            Conexao.closeConnection(conn, ps, rs);
         }
         return provincias;
     }

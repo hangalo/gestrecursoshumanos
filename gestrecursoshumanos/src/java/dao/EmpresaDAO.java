@@ -38,11 +38,14 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM empresa where id_empresa = ?";
     private static final String LISTAR_TUDO = "SELECT * FROM empresa ORDER BY id_empresa";
 
+    PreparedStatement ps;
+    Connection conn;
+    ResultSet rs;
+
     @Override
     public void save(Empresa empresa) {
-        PreparedStatement ps = null;
-        Connection conn = null;
 
+        conn = Conexao.getConnection();
         if (empresa == null) {
             System.err.println("O valor passado não pode ser nulo!");
         }
@@ -51,8 +54,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             File file = new File(empresa.getSigla_empresa());
             FileInputStream inputStream;
             inputStream = new FileInputStream(file);*/
-            
-            conn = Conexao.getConnection();
+
             ps = conn.prepareStatement(INSERIR);
 
             ps.setString(1, empresa.getNome_empresa());
@@ -76,18 +78,17 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados: " + e.getMessage());
-        //} catch (FileNotFoundException ex) {
-        //    System.out.println("Erro : ficheiro Não encontrado");
-        //}
-        }finally {
+            //} catch (FileNotFoundException ex) {
+            //    System.out.println("Erro : ficheiro Não encontrado");
+            //}
+        } finally {
             Conexao.closeConnection(conn, ps);
         }
     }
 
     @Override
     public void update(Empresa empresa) {
-        PreparedStatement ps = null;
-        Connection conn = null;
+       
         if (empresa == null) {
             System.err.println("O valor passado nao pode ser nulo");
         }
@@ -125,8 +126,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
     @Override
     public void delete(Empresa empresa) {
-        PreparedStatement ps = null;
-        Connection conn = null;
+       
         if (empresa == null) {
             System.err.println("O valor passado nao pode ser nulo");
         }
@@ -174,9 +174,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
     @Override
     public Empresa findById(Integer id) {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet rs = null;
+        
         Empresa empresa = new Empresa();
         try {
             conn = Conexao.getConnection();
@@ -198,9 +196,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
     @Override
     public List<Empresa> findAll() {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet rs = null;
+       
         List<Empresa> empresas = new ArrayList<>();
         try {
             conn = Conexao.getConnection();
@@ -214,7 +210,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
         } catch (SQLException ex) {
             System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
         } finally {
-            Conexao.closeConnection(conn);
+            Conexao.closeConnection(conn, ps, rs);
         }
         return empresas;
     }
