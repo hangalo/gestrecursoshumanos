@@ -130,10 +130,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-               
+                    <%
+                        String municipio = new MunicipioDAO().findById(candidato.getMunicipioCandidato().getIdMunicipio()).getNomeMunicipio();
+                    %>
                     <label class="col-xs-3 control-label">Municipio:</label>
                     <div class="col-xs-4">
-                        <input value="<%=candidato.getMunicipioCandidato().getNomeMunicipio()%>" type="text" class="form-control" id="municipioCandidato" name="municipioCandidato"/>
+                        <input value="<%= municipio %>" type="text" class="form-control" id="municipioCandidato" name="municipioCandidato"/>
                     </div>
                 </div>
                
