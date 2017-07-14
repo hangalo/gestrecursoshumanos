@@ -37,7 +37,8 @@
     <% ProvinciaDAO provinciaDAO = new ProvinciaDAO(); 
         MunicipioDAO municipioDAO = new MunicipioDAO();
        List<Provincia> provincias = provinciaDAO.findAll();
-       List<Municipio> municipios;
+       List<Municipio> municipios = municipioDAO.findAll();
+       
        %>
     <body>
         <div class="container">
@@ -67,7 +68,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label >Foto</label>
+                    <label>Foto</label>
                     <input type="file" class="form-control" id="fimagem" name="fimagem"/>
                 </div>
                 
@@ -115,17 +116,15 @@
                 <div class="form-group">
                     <label >Municipio</label>
                     <select name="municipio">
-                        <option value="item1">Item 1</option>
-                        <option value="item1">Item 2</option>
+                        <% for(Municipio tmp : municipios){%>
+                        <option value="<%= tmp.getIdMunicipio()%>"><%=tmp.getNomeMunicipio()%></option>
+                        <% }%>
                     </select>
                 </div>
                 
                 <div class="form-group">
                     <label >Bairro</label>
-                    <select name="bairro">
-                        <option value="item1">Item 1</option>
-                        <option value="item1">Item 2</option>
-                    </select>
+                    <input type="text" id="frua" name="bairro"/>
                 </div>
                 
                 <div class="form-group">

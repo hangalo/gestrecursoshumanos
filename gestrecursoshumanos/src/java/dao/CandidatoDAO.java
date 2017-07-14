@@ -82,7 +82,7 @@ public class CandidatoDAO implements GenericoDAO<Candidato> {
                 ps.setString(2, candidato.getSegundoNomeCandidato());
                 ps.setString(3, candidato.getUltimoNomeFuncionario());
                 ps.setString(4, candidato.getAlcunhaFuncionario());
-                ps.setBlob(5, candidato.getFotoCandidato());
+                ps.setString(5, candidato.getFotoCandidato());
                 ps.setString(6, candidato.getUrlFotoCandidato());
                 ps.setDate(7, candidato.getDataNascimentoCandidato());
                 ps.setString(8, candidato.getTelefoneFixo());
@@ -124,7 +124,7 @@ public class CandidatoDAO implements GenericoDAO<Candidato> {
                 ps.setString(2, candidato.getSegundoNomeCandidato());
                 ps.setString(3, candidato.getUltimoNomeFuncionario());
                 ps.setString(4, candidato.getAlcunhaFuncionario());
-                ps.setBlob(5, candidato.getFotoCandidato());
+                ps.setString(5, candidato.getFotoCandidato());
                 ps.setString(6, candidato.getUrlFotoCandidato());
                 ps.setDate(7, candidato.getDataNascimentoCandidato());
                 ps.setString(8, candidato.getTelefoneFixo());
@@ -253,7 +253,7 @@ public class CandidatoDAO implements GenericoDAO<Candidato> {
             candidato.setSegundoNomeCandidato((resultSet.getString("segundo_nome_candidato")));
             candidato.setUltimoNomeFuncionario((resultSet.getString("ultimo_nome_funcionario")));
             candidato.setAlcunhaFuncionario((resultSet.getString("alcunha_funcionario")));
-            candidato.setFotoCandidato((resultSet.getBlob("foto_candidato")));
+            candidato.setFotoCandidato((resultSet.getString("foto_candidato")));
             candidato.setUrlFotoCandidato((resultSet.getString("url_foto_candidato")));
             candidato.setDataNascimentoCandidato((resultSet.getDate("data_nascimento_candidato")));
             candidato.setTelefoneFixo((resultSet.getString("telefone_fixo")));
