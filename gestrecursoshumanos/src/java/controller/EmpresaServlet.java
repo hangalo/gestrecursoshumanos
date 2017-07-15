@@ -6,14 +6,23 @@
 package controller;
 
 import dao.EmpresaDAO;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import modelo.Empresa;
+import org.apache.commons.io.IOUtils;
 import util.DateUtil;
 
 /**
@@ -21,6 +30,9 @@ import util.DateUtil;
  * @author FranciscoMiguel
  */
 @WebServlet(name = "EmpresaServlet", urlPatterns = {"/empresaServlet"})
+
+@MultipartConfig(maxFileSize = 16177215) // tamanho maximo do ficheiro 16 MB
+
 public class EmpresaServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -49,11 +61,9 @@ public class EmpresaServlet extends HttpServlet {
             if (comando.equalsIgnoreCase("guardar")) {
                 empresa.setNome_empresa(request.getParameter("nome_empresa"));
                 empresa.setSigla_empresa(request.getParameter("sigla_empresa"));
-                empresa.setLogo_empresa(request.getParameter("logo_empresa"));
                 empresa.setRua_empresa(request.getParameter("rua_empresa"));
                 empresa.setCasa_empresa(request.getParameter("casa_empresa"));
                 empresa.setUrl_logo_empresa(request.getParameter("url_logo_empresa"));
-                empresa.setSigla_empresa(request.getParameter("sigla_empresa"));
                 java.sql.Date date = new java.sql.Date(dateUtil.strToDate(request.getParameter("data_cricacao")).getTime());
                 empresa.setData_cricacao(date);
                 empresa.setBairro_empresa(request.getParameter("bairro_empresa"));
@@ -66,15 +76,21 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setTelemovel_secundario(request.getParameter("telemovel_secundario"));
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
+                Part ficheiro = request.getPart("logo_empresa");
+                if (ficheiro != null) {
+                    byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
+                     empresa.setLogo_empresa(ficheiroImagem);
+                     empresa.setUrl_logo_empresa(ficheiro.getSubmittedFileName());
+                    // System.err.println("Depois");
+                    doUpload(ficheiro);
+                }
                 empresaDao.save(empresa);
                 response.sendRedirect("paginas/empresa/empresa_save.jsp");
             } else if (comando.equalsIgnoreCase("editar")) {
                 empresa.setId_empresa(Integer.parseInt(request.getParameter("id_empresa")));
                 empresa.setNome_empresa(request.getParameter("nome_empresa"));
                 empresa.setCasa_empresa(request.getParameter("casa_empresa"));
-                empresa.setLogo_empresa(request.getParameter("logo_empresa"));
                 empresa.setRua_empresa(request.getParameter("rua_empresa"));
-                empresa.setUrl_logo_empresa(request.getParameter("url_logo_empresa"));
                 empresa.setSigla_empresa(request.getParameter("sigla_empresa"));
                 java.sql.Date date = new java.sql.Date(dateUtil.strToDate(request.getParameter("data_cricacao")).getTime());
                 empresa.setData_cricacao(date);
@@ -88,6 +104,13 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setTelemovel_secundario(request.getParameter("telemovel_secundario"));
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
+                Part ficheiro = request.getPart("logo_empresa");
+                if (ficheiro != null) {
+                    byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
+                     empresa.setLogo_empresa(ficheiroImagem);
+                     empresa.setUrl_logo_empresa(ficheiro.getSubmittedFileName());
+                    doUpload(ficheiro);
+                }
                 empresaDao.update(empresa);
                 response.sendRedirect("paginas/empresa/empresa_listar.jsp");
             } else if (comando.equalsIgnoreCase("eliminar")) {
@@ -96,7 +119,7 @@ public class EmpresaServlet extends HttpServlet {
             } else if (comando.equalsIgnoreCase("prepara_editar")) {
                 empresa = empresaDao.findById(empresa.getId_empresa());
                 request.setAttribute("empresa", empresa);
-                RequestDispatcher rd = request.getRequestDispatcher("paginas/empresa/empresa_editar.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/paginas/empresa/empresa_editar.jsp");
                 rd.forward(request, response);
             } else if (comando.equalsIgnoreCase("listar")) {
                 response.sendRedirect("paginas/empresa/empresa_listar.jsp");
@@ -105,6 +128,24 @@ public class EmpresaServlet extends HttpServlet {
             }
         } catch (IOException | ServletException ex) {
             System.err.println("Erro na leitura dos dados: " + ex.getMessage());
+        }
+    }
+
+    private void doUpload(Part part) {
+        try {
+            InputStream in = part.getInputStream();
+            File f = new File("C:\\imagens_projeto\\" + part.getSubmittedFileName());
+            f.createNewFile();
+            FileOutputStream out = new FileOutputStream(f);
+            byte[] buffer = new byte[1024 * 1024 * 100];
+            int length;
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+            out.close();
+            in.close();
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -118,6 +159,7 @@ public class EmpresaServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);

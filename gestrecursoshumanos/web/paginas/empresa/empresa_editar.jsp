@@ -26,7 +26,7 @@
         <div class="container">
             <h3 style="text-align: center">Ficha de Alteracao Da Empresa</h3>
             <br/>
-            <form class="form-horizontal" role="form" action="<%=request.getContextPath()%>/empresaServlet?comando=editar" method="POST">
+            <form class="form-horizontal" enctype="multipart/form-data" role="form" action="<%=request.getContextPath()%>/empresaServlet?comando=editar" method="POST">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Id:</label>
                     <div class="col-xs-5" >
@@ -40,6 +40,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-xs-3 control-label">Logo</label>
+                    <div class="col-xs-4" >
+                        <input type="file" class="form-control" id="logo_empresa" 
+                               name="logo_empresa" value="<%=empresa.getUrl_logo_empresa()%>"/>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-xs-3 control-label">Sigla</label>
                     <div class="col-xs-4">
                         <input type="text" class="form-control" id="sigla_empresa" 
@@ -47,13 +54,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Url:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" id="url_logo_empresa" name="url_logo_empresa" 
-                               value="<%=empresa.getUrl_logo_empresa()%>"/>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Data De Criação</label>
                     <div class="col-xs-4" >

@@ -16,7 +16,6 @@ public class Empresa {
     private int id_empresa;
     private String nome_empresa;
     private String sigla_empresa;
-    private String logo_empresa;
     private String url_logo_empresa;
     private Date data_cricacao;
     private String casa_empresa;
@@ -31,10 +30,13 @@ public class Empresa {
     private String telemovel_secundario;
     private String fax_principal;
     private String fax_secundario;
-
+    
+    private byte[] logo_empresa;
+    private String nameLogoEmpresa;
+    
     public Empresa() {}
 
-    public Empresa(Integer id_empresa, String nome_empresa, String sigla_empresa, String logo_empresa, String url_logo_empresa, Date data_cricacao, String casa_empresa, String rua_empresa, String bairro_empresa, String distrito_empresa, String home_page, String email_princiapal, String telefone_princiapl, String telefone_secundario, String telemovel_principal, String telemovel_secundario, String fax_principal, String fax_secundario) {
+    public Empresa(Integer id_empresa, String nome_empresa, String sigla_empresa, byte[] logo_empresa, String url_logo_empresa, Date data_cricacao, String casa_empresa, String rua_empresa, String bairro_empresa, String distrito_empresa, String home_page, String email_princiapal, String telefone_princiapl, String telefone_secundario, String telemovel_principal, String telemovel_secundario, String fax_principal, String fax_secundario) {
         this.id_empresa = id_empresa;
         this.nome_empresa = nome_empresa;
         this.sigla_empresa = sigla_empresa;
@@ -95,20 +97,6 @@ public class Empresa {
      */
     public void setSigla_empresa(String sigla_empresa) {
         this.sigla_empresa = sigla_empresa;
-    }
-
-    /**
-     * @return the logo_empresa
-     */
-    public String getLogo_empresa() {
-        return logo_empresa;
-    }
-
-    /**
-     * @param logo_empresa the logo_empresa to set
-     */
-    public void setLogo_empresa(String logo_empresa) {
-        this.logo_empresa = logo_empresa;
     }
 
     /**
@@ -307,4 +295,31 @@ public class Empresa {
         this.fax_secundario = fax_secundario;
     }
 
+    /**
+     * @param logo_empresa the logo_empresa to set
+     */
+    public void setLogo_empresa(byte[] logo_empresa) {
+       this.logo_empresa = logo_empresa;
+    }
+
+    /**
+     * @return the logo_empresa
+     */
+    public byte[] getLogo_empresa() {
+        return logo_empresa;
+    }
+
+    /**
+     * @return the nameLogoEmpresa
+     */
+    public String getNameLogoEmpresa() {
+        return nameLogoEmpresa;
+    }
+
+    /**
+     * @param nameLogoEmpresa the nameLogoEmpresa to set
+     */
+    public void setNameLogoEmpresa(String nameLogoEmpresa) {
+        this.nameLogoEmpresa = nameLogoEmpresa;
+    }
 }
