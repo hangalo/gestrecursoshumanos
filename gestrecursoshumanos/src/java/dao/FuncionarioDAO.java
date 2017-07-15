@@ -14,6 +14,7 @@ import java.util.List;
 import modelo.Municipio;
 import modelo.Funcionario;
 import util.Conexao;
+import java.sql.Date;
 
 /**
  *
@@ -59,7 +60,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
             ps.setString(2, funcionario.getSegundoNomeFuncionario());
             ps.setString(3, funcionario.getUltimoNomeFuncionario());
             ps.setString(4, funcionario.getAlcunhaFuncionario());
-            ps.setDate(5, funcionario.getDataNascimentoFuncionario());
+            ps.setDate(5, new Date(funcionario.getDataNascimentoFuncionario().getTime()));
             ps.setBytes(6, funcionario.getFotoFuncionario());
             ps.setString(7, funcionario.getUrlFotoFuncionario());
             ps.setString(8, funcionario.getTelefoneFuncionario());
@@ -97,7 +98,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
             ps.setString(2, funcionario.getSegundoNomeFuncionario());
             ps.setString(3, funcionario.getUltimoNomeFuncionario());
             ps.setString(4, funcionario.getAlcunhaFuncionario());
-            ps.setDate(5, funcionario.getDataNascimentoFuncionario());
+            ps.setDate(5, new java.sql.Date(funcionario.getDataNascimentoFuncionario().getTime()));
             ps.setBytes(6, funcionario.getFotoFuncionario());
             ps.setString(7, funcionario.getUrlFotoFuncionario());
             ps.setString(8, funcionario.getTelefoneFuncionario());
