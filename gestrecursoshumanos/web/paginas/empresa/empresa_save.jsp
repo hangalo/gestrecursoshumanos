@@ -18,7 +18,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form class="form-horizontal" role="form" action="<%=request.getContextPath()%>/empresaServlet?comando=guardar" method="POST">
+        <form class="form-horizontal" role="form" enctype="multipart/form-data" action="<%=request.getContextPath()%>/empresaServlet?comando=guardar" method="POST">
             <div class="form-group">
                 <label class="col-xs-3 control-label">Nome:</label>
                 <div class="col-xs-4">
@@ -39,12 +39,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-xs-3 control-label">Url:</label>
-                <div class="col-xs-4">
-                    <input type="text" class="form-control" id="url_logo_empresa" name="url_logo_empresa"/>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-xs-3 control-label">Data De Criação</label>
                 <div class="col-xs-4" >

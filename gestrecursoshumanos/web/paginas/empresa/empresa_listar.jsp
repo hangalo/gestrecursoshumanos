@@ -28,7 +28,6 @@
                     <th>Id</th>
                     <th>Nome</th>
                     <th>Sigla</th>
-                    <th>Url</th>
                     <th>Data De Criacao</th>
                     <th>Casa</th>
                     <th>Rua </th>
@@ -42,6 +41,7 @@
                     <th>Telemovel Secundario</th>
                     <th>Fax Principal</th>
                     <th>Fax Secundario</th>
+                    <th>Logo</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,7 +50,6 @@
                     <td><%=empresa.getId_empresa()%></td>
                     <td><%=empresa.getNome_empresa()%></td>
                     <td><%=empresa.getSigla_empresa() %></td>
-                    <td><%=empresa.getUrl_logo_empresa()%></td>
                     <td><%=empresa.getData_cricacao() %></td>
                     <td><%=empresa.getCasa_empresa()%></td>
                     <td><%=empresa.getRua_empresa()%></td>
@@ -64,6 +63,9 @@
                     <td><%=empresa.getTelemovel_secundario()%></td>
                     <td><%=empresa.getFax_principal()%></td>
                     <td><%=empresa.getFax_secundario()%></td>
+                    
+                    <td> <img src="<%=request.getContextPath()%>/showImageEmpresa?ficheiro=<%=empresa.getUrl_logo_empresa()%>" 
+                              width="60" height="60" </td>
                 </tr>
 
             <td><a href="<%=request.getContextPath()%>/empresaServlet?comando=prepara_editar&id_empresa=<%=empresa.getId_empresa()%>">

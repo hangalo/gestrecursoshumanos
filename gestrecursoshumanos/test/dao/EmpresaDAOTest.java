@@ -38,7 +38,6 @@ public class EmpresaDAOTest {
         empresa.setId_empresa(1);
         empresa.setNome_empresa("LIADRISMAEL");
         empresa.setSigla_empresa("LIADRISMAEL");
-        empresa.setLogo_empresa("LIADRISMAEL");
         empresa.setUrl_logo_empresa("LIADRISMAEL");
         empresa.setData_cricacao(null);
         empresa.setCasa_empresa("LIADRISMAEL");
