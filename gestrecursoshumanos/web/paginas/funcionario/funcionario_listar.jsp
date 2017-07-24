@@ -17,7 +17,6 @@
         <title>Listar Funcionarios</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
         <% FuncionarioDAO funcionarioDAO = new FuncionarioDAO(); %>
         <div class="container">
             <div id="titulo">
@@ -44,8 +43,8 @@
                     </thead>
                     <tbody>
                     <% for(Funcionario tmp : funcionarioDAO.findAll()){ %>
-                        <tr>
-                            <td><img src="<%=request.getContextPath()%>/visualizaImagemServlet?ficheiro=<%=tmp.getUrlFotoFuncionario()%>" width="60" height="60"> </td>
+                    <tr><% request.getSession().setAttribute("obj", new FuncionarioDAO()); %>
+                            <td><img src="<%=request.getContextPath()%>/visualizaImagemServlet?id=<%=tmp.getIdFuncionario()%>&ficheiro=<%=tmp%>" width="60" height="60"> </td>
                             <td colspan=""><%= tmp.getPrimeiroNomeFuncionario() + " " + tmp.getSegundoNomeFuncionario() + " " + tmp.getUltimoNomeFuncionario() %></td>
                             <td><%= request.getAttribute("tmp") %><%= tmp.getAlcunhaFuncionario() %></td>
                             <td><%= tmp.getDataNascimentoFuncionario() %></td>

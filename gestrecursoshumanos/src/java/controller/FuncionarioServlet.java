@@ -62,11 +62,9 @@ public class FuncionarioServlet extends HttpServlet {
         }
         funcionarioDAO.save(funcionario);
         
-        
         request.setAttribute("resposta", funcionario);
         RequestDispatcher rd = request.getRequestDispatcher("/paginas/cadastro_result.jsp");
         rd.forward(request, response);
-        
     }
     
     private void doUpload(Part part, HttpServletRequest request) {

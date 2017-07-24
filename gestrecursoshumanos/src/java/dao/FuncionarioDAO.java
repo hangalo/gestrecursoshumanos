@@ -20,7 +20,7 @@ import java.sql.Date;
  *
  * @author Viv Mendes
  */
-public class FuncionarioDAO implements GenericoDAO<Funcionario> {
+public class FuncionarioDAO implements GenericoDAO<Funcionario>, FotoGenericDAO {
     
     private static final String INSERIR = "INSERT INTO funcionario(primeiro_nome_funcionario, segundo_nome_funcionario, " +
                             "ultimo_nome_funcionario, alcunha_funcionario, data_nascimento_funcionario, foto_funcionario, " +
@@ -60,7 +60,7 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario> {
             ps.setString(2, funcionario.getSegundoNomeFuncionario());
             ps.setString(3, funcionario.getUltimoNomeFuncionario());
             ps.setString(4, funcionario.getAlcunhaFuncionario());
-            ps.setDate(5, new Date(funcionario.getDataNascimentoFuncionario().getTime()));
+            ps.setDate(5, new Date(0));
             ps.setBytes(6, funcionario.getFotoFuncionario());
             ps.setString(7, funcionario.getUrlFotoFuncionario());
             ps.setString(8, funcionario.getTelefoneFuncionario());

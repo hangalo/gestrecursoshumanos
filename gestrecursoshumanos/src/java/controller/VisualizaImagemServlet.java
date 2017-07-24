@@ -5,15 +5,23 @@
  */
 package controller;
 
+import dao.FotoGenericDAO;
+import dao.FuncionarioDAO;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.Conexao;
 
 /**
  *
@@ -29,8 +37,19 @@ public class VisualizaImagemServlet extends HttpServlet {
         
         if(request.getParameter("id") == null)
             loadImage(request, response);
-        else
-            loadImageBD(request, response);
+        else{
+            response.setContentType("image/jpg; image/png");
+            FotoGenericDAO fotoGenericDAO = (FotoGenericDAO)request.getSession().getAttribute("obj");
+            
+            int idImagem = Integer.parseInt(request.getParameter("id"));
+            byte[] imagem = fotoGenericDAO.recuperarImagem(idImagem);
+            if (imagem == null) {
+            imagem = carregarImagemPadrao();
+            }
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(imagem);
+            outputStream.flush();
+        }
     }
     
     private void loadImage(HttpServletRequest request, HttpServletResponse response){
@@ -42,7 +61,7 @@ public class VisualizaImagemServlet extends HttpServlet {
             String ficheiro = request.getParameter("ficheiro");
             byte[] bytes;
             //Obtem o conteudo da imagem
-            try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(caminhoAbsoluto+ficheiro))) {
+            try (BufferedInputStream in = new BufferedInputStream(new FileInputStream("c:\\test\\java.jpg"))) {
                 //Obtem o conteudo da imagem
                 bytes = new byte[in.available()];
                 in.read(bytes);
@@ -96,8 +115,21 @@ public class VisualizaImagemServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void loadImageBD(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private byte[] carregarImagemPadrao() throws IOException {
+        String caminho = getServletContext().getRealPath("/imagens/");
+        System.out.println(caminho);
+        byte byteArray[] = null;
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(new File(caminho, "imagem_padrao.jpg"));
+            int numeroBytes = fileInputStream.available();
+            byteArray = new byte[numeroBytes];
+            fileInputStream.read(byteArray);
+        } catch (IOException ex) {
+        } finally {
+            fileInputStream.close();
+        }
+        return byteArray;
     }
 
 }
