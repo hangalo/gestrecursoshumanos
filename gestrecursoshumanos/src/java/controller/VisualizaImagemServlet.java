@@ -6,22 +6,18 @@
 package controller;
 
 import dao.FotoGenericDAO;
-import dao.FuncionarioDAO;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.Conexao;
 
 /**
  *
@@ -38,17 +34,7 @@ public class VisualizaImagemServlet extends HttpServlet {
         if(request.getParameter("id") == null)
             loadImage(request, response);
         else{
-            response.setContentType("image/jpg; image/png");
-            FotoGenericDAO fotoGenericDAO = (FotoGenericDAO)request.getSession().getAttribute("obj");
-            
-            int idImagem = Integer.parseInt(request.getParameter("id"));
-            byte[] imagem = fotoGenericDAO.recuperarImagem(idImagem);
-            if (imagem == null) {
-            imagem = carregarImagemPadrao();
-            }
-            OutputStream outputStream = response.getOutputStream();
-            outputStream.write(imagem);
-            outputStream.flush();
+            loadImageBD(request, response);
         }
     }
     
@@ -73,6 +59,24 @@ public class VisualizaImagemServlet extends HttpServlet {
         catch (IOException ex) {
             System.err.println("Ficheiro nao encontrado: " + ex.getMessage() + request.getContextPath());
             ex.printStackTrace(System.out);
+        }
+    }
+    
+    private void loadImageBD(HttpServletRequest request, HttpServletResponse response){
+        try {
+            response.setContentType("image/jpg; image/png");
+            FotoGenericDAO fotoGenericDAO = (FotoGenericDAO)request.getSession().getAttribute("obj");
+            
+            int idImagem = Integer.parseInt(request.getParameter("id"));
+            byte[] imagem = fotoGenericDAO.recuperarImagem(idImagem);
+            if (imagem == null) {
+                imagem = carregarImagemPadrao();
+            }
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(imagem);
+            outputStream.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(VisualizaImagemServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

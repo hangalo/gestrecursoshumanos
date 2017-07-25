@@ -43,7 +43,7 @@
     <body>
         <div class="container">
             
-            <form class="form-horizontal" enctype="multipart/form-data" action="<%=request.getContextPath()%>/funcionarioServlet" method="POST">
+            <form class="form-horizontal" enctype="multipart/form-data" action="<%=request.getContextPath()%>/funcionarioServlet?comando=guardar" method="POST">
                 <div class="form-group">
                     <label>Primeiro Nome</label>
                     <input type="text" id="fpnome" name="fpnome" />
@@ -95,14 +95,6 @@
                     <label > Email Alternativo</label>
                     <input type="text" id="femaila" name="femaila"/>
                 </div>
-                <!--Endereco-->
-<!--                <div class="form-group">
-                    <label  id="lblpais">Pais</label>
-                    <select name="pais">
-                        <option value="item1">Item 1</option>
-                        <option value="item1">Item 2</option>
-                    </select>
-                </div>-->
                 
                 <div class="form-group">
                     <label >Provincia</label>

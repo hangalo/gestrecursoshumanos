@@ -37,6 +37,45 @@ public class FuncionarioServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        fillFuncionario(request);
+        Part ficheiro = request.getPart("fimagem");
+        String comando = request.getParameter("comando");
+        
+        
+        if (comando.equalsIgnoreCase("guardar")){
+            if (ficheiro != null) {
+                byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
+                funcionario.setFotoFuncionario(ficheiroImagem);
+                funcionario.setUrlFotoFuncionario(ficheiro.getSubmittedFileName());
+                doUpload(ficheiro, request);
+            }
+            funcionarioDAO.save(funcionario);
+            response.sendRedirect("paginas/funcionario/funcionario.jsp");
+        } 
+        else if (comando.equalsIgnoreCase("editar")) {
+            response.sendRedirect("paginas/funcionario/funcionario_listar.jsp");
+        } 
+        else if (comando.equalsIgnoreCase("eliminar")) {
+            response.sendRedirect("paginas/funcionario/funcionario_listar.jsp");
+        } 
+        else if (comando.equalsIgnoreCase("prepara_editar")) {
+            //request.setAttribute("categoriaFuncionario", categoriaFuncionario);
+            RequestDispatcher rd = request.getRequestDispatcher("/paginas/funcionario/funcionario_editar.jsp");
+            rd.forward(request, response);
+        } 
+        else if (comando.equalsIgnoreCase("listar")) {
+            response.sendRedirect("paginas/funcionario/funcionario_listar.jsp");
+        } 
+        else if (comando.equalsIgnoreCase("principal")) {
+            response.sendRedirect("paginas/funcionario/index.jsp");
+        }
+        
+        
+        
+    }
+    
+    public void fillFuncionario(HttpServletRequest request){
         funcionario.setPrimeiroNomeFuncionario(request.getParameter("fpnome"));
         funcionario.setSegundoNomeFuncionario(request.getParameter("fsnome"));
         funcionario.setUltimoNomeFuncionario(request.getParameter("funome"));
@@ -52,19 +91,6 @@ public class FuncionarioServlet extends HttpServlet {
         funcionario.setBairroFuncionario( request.getParameter("bairro"));
         funcionario.setRuaFuncionario(request.getParameter("frua"));
         funcionario.setCasaFuncionario(request.getParameter("fcasa"));
-        
-        Part ficheiro = request.getPart("fimagem");
-        if (ficheiro != null) {
-            byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
-            funcionario.setFotoFuncionario(ficheiroImagem);
-            funcionario.setUrlFotoFuncionario(ficheiro.getSubmittedFileName());
-            doUpload(ficheiro, request);
-        }
-        funcionarioDAO.save(funcionario);
-        
-        request.setAttribute("resposta", funcionario);
-        RequestDispatcher rd = request.getRequestDispatcher("/paginas/cadastro_result.jsp");
-        rd.forward(request, response);
     }
     
     private void doUpload(Part part, HttpServletRequest request) {

@@ -45,4 +45,17 @@
  * 
  * >> Realizar os testes unitarios
  * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ * 
+ * OBS - 25/07/2017 - Vivaldo Mendes Cândido
+ * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ 
+ * >>>>(Implementacao)Processamento de imagem via servlet BD e ficheiro
+ * 
+ * De forma a ter um unico servlet para o processamento de imagens foi criado
+ * o servlet VisualizaImagemServlet para que tal funcione a classe DAO da entidade em questao
+ * deve implementar a interface FotoGenericDAO
+ * 
+ * o metodo de uso na pagina jsp nao difere da encontrada no livro pagina 95
+ * 
+ * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
  */
