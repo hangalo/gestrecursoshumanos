@@ -34,9 +34,20 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario>, FotoGenericDAO 
                             "email_principal = ?, email_secundario = ?, casa_funcionario = ?, rua_funcionario = ?, bairro_funcionario = ?, " +
                             "id_municipio = ? WHERE id_funcionario = ?";
     private static final String ELIMINAR = "DELETE FROM funcionario WHERE id_funcionario = ?";
-    private static final String BUSCAR_POR_CODIGO = "SELECT * FROM funcionario where id_funcionario = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM funcionario ORDER BY primeiro_nome_funcionario";
-    private static final String BUSCAR_IMAGEM_POR_CODIGO = "SELECT foto_funcionario FROM funcionario where id_funcionario = ?";
+    private static final String BUSCAR_POR_CODIGO = "SELECT F.id_funcionario, F.primeiro_nome_funcionario, F.segundo_nome_funcionario, " +
+                            "F.ultimo_nome_funcionario, F.alcunha_funcionario, F.data_nascimento_funcionario, F.foto_funcionario, " +
+                            "F.url_foto_funcionario, F.telefone_funcionario, F.telemovel_princiapal, F.telemovel_secundario, " +
+                            "F.email_principal, F.email_secundario, F.casa_funcionario, F.rua_funcionario, F.bairro_funcionario, " +
+                            "M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M.id_municipio ORDER BY primeiro_nome_funcionario where id_funcionario = ?";
+    /*SELECT F.primeiro_nome_funcionario, F.segundo_nome_funcionario,F.ultimo_nome_funcionario, F.alcunha_funcionario, F.data_nascimento_funcionario, F.foto_funcionario,
+F.url_foto_funcionario, F.telefone_funcionario, F.telemovel_princiapal, F.telemovel_secundario,F.email_principal, F.email_secundario, F.casa_funcionario, F.rua_funcionario, F.bairro_funcionario,
+M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M.id_municipio ORDER BY primeiro_nome_funcionario;*/
+    private static final String LISTAR_TUDO = "SELECT F.primeiro_nome_funcionario, F.segundo_nome_funcionario, " +
+                            "F.ultimo_nome_funcionario, F.alcunha_funcionario, F.data_nascimento_funcionario, F.foto_funcionario, " +
+                            "F.url_foto_funcionario, F.telefone_funcionario, F.telemovel_princiapal, F.telemovel_secundario, " +
+                            "F.email_principal, F.email_secundario, F.casa_funcionario, F.rua_funcionario, F.bairro_funcionario, " +
+                            "M.nome_municipio FROM funcionario F inner join municipio M ORDER BY primeiro_nome_funcionario";
+    private static final String BUSCAR_IMAGEM_POR_CODIGO = "SELECT foto_funcionario FROM funcionario inner join municipio M on id_municipio = M.id_municipio where id_funcionario = ?";
     
      PreparedStatement ps;
     Connection conn;
@@ -186,8 +197,8 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario>, FotoGenericDAO 
     @Override
     public void popularComDados(Funcionario funcionario, ResultSet rs){
         try {
-             funcionario.setIdFuncionario(rs.getInt("id_funcionario"));
-             funcionario.setPrimeiroNomeFuncionario(rs.getString("primeiro_nome_funcionario"));
+             funcionario.setIdFuncionario(rs.getInt("F.id_funcionario"));
+             funcionario.setPrimeiroNomeFuncionario(rs.getString("F.primeiro_nome_funcionario"));
              funcionario.setSegundoNomeFuncionario(rs.getString("segundo_nome_funcionario"));
              funcionario.setUltimoNomeFuncionario(rs.getString("ultimo_nome_funcionario"));
              funcionario.setAlcunhaFuncionario(rs.getString("alcunha_funcionario"));
@@ -202,7 +213,9 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario>, FotoGenericDAO 
              funcionario.setCasaFuncionario(rs.getString("casa_funcionario"));
              funcionario.setRuaFuncionario(rs.getString("rua_funcionario"));
              funcionario.setBairroFuncionario(rs.getString("bairro_funcionario"));
-             funcionario.setMunicipio(new Municipio(rs.getInt("id_municipio"), "", null));
+             Municipio tmp = new Municipio();
+             tmp.setNomeMunicipio(rs.getString("M.nome_municipio"));
+             funcionario.setMunicipio(tmp);
 
         } catch (SQLException ex) {
             System.err.println("Erro ao carregar dados: " + ex.getLocalizedMessage());

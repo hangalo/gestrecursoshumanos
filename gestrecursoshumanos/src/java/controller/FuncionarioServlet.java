@@ -33,7 +33,8 @@ public class FuncionarioServlet extends HttpServlet {
 
     FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
     Funcionario funcionario = new Funcionario();
-    
+    private byte[] ficheiro;
+    private String URLFicheiro;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

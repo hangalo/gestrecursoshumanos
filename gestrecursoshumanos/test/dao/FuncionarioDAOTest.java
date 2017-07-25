@@ -69,7 +69,7 @@ public class FuncionarioDAOTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        Integer id = 1;
+        Integer id = 2;
         FuncionarioDAO instance = new FuncionarioDAO();
         Funcionario result = instance.findById(id);
         assertTrue(result!=null);
