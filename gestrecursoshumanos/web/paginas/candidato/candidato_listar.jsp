@@ -42,7 +42,6 @@
                     <th>Rua</th>
                     <th>Casa</th>
                     <th>Foto candicato</th>
-                    <th>Url Foto candidato</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,8 +62,8 @@
                     <td><%=candidato.getBairroCandidato()%></td>
                     <td><%=candidato.getRuaFuncionario()%></td>
                     <td><%=candidato.getCasaCandidato()%></td>
-                    <td><%=candidato.getFotoCandidato()%></td>
-                    <td><%=candidato.getUrlFotoCandidato()%></td>
+                    <td><img src="<%=request.getContextPath()%>/showImageCandidatoServlet?ficheiro=<%=candidato.getUrlFotoCandidato()%>" 
+                              width="60" height="60"
                 </tr>
 
                 <td><a href="<%=request.getContextPath()%>/candidatoServlet?comando=prepara_editar&idCandidato=<%=candidato.getIdCandidato()%>">

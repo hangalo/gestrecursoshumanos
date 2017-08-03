@@ -5,21 +5,22 @@
  */
 package controller;
 
-import com.mysql.jdbc.Blob;
 import dao.CandidatoDAO;
-import dao.EmpresaDAO;
 import dao.MunicipioDAO;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import modelo.Candidato;
-import modelo.Empresa;
-import modelo.Municipio;
+import org.apache.commons.io.IOUtils;
 import util.DateUtil;
 
 /**
@@ -27,6 +28,9 @@ import util.DateUtil;
  * @author domingos
  */
 @WebServlet(name = "CandidatoServlet", urlPatterns = {"/candidatoServlet"})
+
+@MultipartConfig(maxFileSize = 16177215) // tamanho maximo do ficheiro 16 MB
+
 public class CandidatoServlet extends HttpServlet {
 
 //    Candidato candidato = new Candidato();
@@ -66,7 +70,7 @@ public class CandidatoServlet extends HttpServlet {
                 java.sql.Date date = new java.sql.Date(DateUtil.strToDate(request.getParameter("dataNascimento")).getTime());
                 candidato.setDataNascimentoCandidato(date);
                 
-                candidato.setMunicipioCandidato(new MunicipioDAO().findById(Integer.parseInt(request.getParameter("municipioCandidato"))));
+                candidato.setMunicipioCandidato(new MunicipioDAO().findById(Integer.parseInt(request.getParameter("municipioCandidato").substring(0, 2).trim())));
                 candidato.setBairroCandidato(request.getParameter("bairroCandidato"));
                 candidato.setRuaFuncionario(request.getParameter("ruaCandidato"));
                 candidato.setCasaCandidato(request.getParameter("casaCandidato"));
@@ -78,8 +82,14 @@ public class CandidatoServlet extends HttpServlet {
                 candidato.setTelemovelPrincipal(request.getParameter("telefonePrincipal"));
                 candidato.setTelemovelSecundario(request.getParameter("telefoneSecundario"));
                 
-                candidato.setFotoCandidato( request.getParameter("fotoCandidato"));
-                candidato.setUrlFotoCandidato(request.getParameter("urlFotoCandidato"));
+                Part ficheiro = request.getPart("fotoCandidato");
+                if (ficheiro != null) {
+                    byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
+                     candidato.setFotoCandidato(ficheiroImagem);
+                     candidato.setUrlFotoCandidato(ficheiro.getSubmittedFileName());
+                    doUpload(ficheiro);
+                }
+                //candidato.setUrlFotoCandidato(request.getParameter("urlFotoCandidato"));
                 
                 
                 candidatoDAO.save(candidato);
@@ -93,7 +103,7 @@ public class CandidatoServlet extends HttpServlet {
                 java.sql.Date date = new java.sql.Date(DateUtil.strToDate(request.getParameter("dataNascimento")).getTime());
                 candidato.setDataNascimentoCandidato(date);
                 
-                candidato.setMunicipioCandidato(new MunicipioDAO().findById(Integer.parseInt(request.getParameter("municipioCandidato"))));
+                candidato.setMunicipioCandidato(new MunicipioDAO().findById(Integer.parseInt(request.getParameter("municipioCandidato").substring(0, 2).trim())));
                 candidato.setBairroCandidato(request.getParameter("bairroCandidato"));
                 candidato.setRuaFuncionario(request.getParameter("ruaCandidato"));
                 candidato.setCasaCandidato(request.getParameter("casaCandidato"));
@@ -105,15 +115,21 @@ public class CandidatoServlet extends HttpServlet {
                 candidato.setTelemovelPrincipal(request.getParameter("telefonePrincipal"));
                 candidato.setTelemovelSecundario(request.getParameter("telefoneSecundario"));
                 
-                candidato.setFotoCandidato( request.getParameter("fotoCandidato"));
-                candidato.setUrlFotoCandidato(request.getParameter("urlFotoCandidato"));
+                Part ficheiro = request.getPart("fotoCandidato");
+                if (ficheiro != null) {
+                    byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
+                     candidato.setFotoCandidato(ficheiroImagem);
+                     candidato.setUrlFotoCandidato(ficheiro.getSubmittedFileName());
+                    doUpload(ficheiro);
+                }
+                //candidato.setUrlFotoCandidato(request.getParameter("urlFotoCandidato"));
                 
                 
                 candidatoDAO.update(candidato);
                 response.sendRedirect("paginas/candidato/candidato_listar.jsp");
             } else if (comando.equalsIgnoreCase("eliminar")) {
                 candidatoDAO.delete(candidato);
-                response.sendRedirect("paginas/candidato/empresa_listar.jsp");
+                response.sendRedirect("paginas/candidato/candidato_listar.jsp");
             } else if (comando.equalsIgnoreCase("prepara_editar")) {
                 candidato = candidatoDAO.findById(candidato.getIdCandidato());
                 request.setAttribute("candidato", candidato);
@@ -126,6 +142,24 @@ public class CandidatoServlet extends HttpServlet {
             }
         } catch (IOException | ServletException ex) {
             System.err.println("Erro na leitura dos dados: " + ex.getMessage());
+        }
+    }
+    
+    private void doUpload(Part part) {
+        try {
+            InputStream input = part.getInputStream();
+            File file = new File("/home/domingos/imagens_candidato/" + part.getSubmittedFileName());
+            file.createNewFile();
+            FileOutputStream out = new FileOutputStream(file);
+            byte[] buffer = new byte[1024 * 1024 * 100];
+            int length;
+            while ((length = input.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+            out.close();
+            input.close();
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
         }
     }
 

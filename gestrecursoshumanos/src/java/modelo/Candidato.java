@@ -17,7 +17,7 @@ public class Candidato {
     private String segundoNomeCandidato;
     private String ultimoNomeFuncionario;
     private String alcunhaFuncionario;
-    private String fotoCandidato;
+    private byte[] fotoCandidato;
     private String urlFotoCandidato;
     private Date dataNascimentoCandidato;
     private String telefoneFixo;
@@ -33,13 +33,13 @@ public class Candidato {
     
 //construtor vazio para inicializar os atributos da classe
     public Candidato() {
-        this(0, "", "", "", "", "", "", null, "", "", "", "", "", "", "", "", null);
+        this(0, "", "", "", "", null, "", null, "", "", "", "", "", "", "", "", null);
     }
 //Declaraco do segundo construtor que atribui os valor que recebe aos atributos
 
     public Candidato(int idCandidato, String primeiroNomeCandidato, 
             String segundoNomeCandidato, String ultimoNomeFuncionario, 
-            String alcunhaFuncionario, String fotoCandidato, String urlFotoCandidato, 
+            String alcunhaFuncionario, byte[] fotoCandidato, String urlFotoCandidato, 
             Date dataNascimentoCandidato, String telefoneFixo, String telemovelPrincipal, 
             String telemovelSecundario, String emailPrincipal, String emailSecundario, 
             String casaCandidato, String ruaFuncionario, String bairroCandidato, 
@@ -106,11 +106,11 @@ public class Candidato {
         this.alcunhaFuncionario = alcunhaFuncionario;
     }
 
-    public String getFotoCandidato() {
+    public byte[] getFotoCandidato() {
         return fotoCandidato;
     }
 
-    public void setFotoCandidato(String fotoCandidato) {
+    public void setFotoCandidato(byte[] fotoCandidato) {
         this.fotoCandidato = fotoCandidato;
     }
 

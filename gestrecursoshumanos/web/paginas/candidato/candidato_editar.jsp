@@ -24,7 +24,7 @@
         %>
         
          <div class="container">
-            <form class="form-horizontal" role="form" action="<%=request.getContextPath()%>/candidatoServlet?comando=editar" method="POST">
+            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="<%=request.getContextPath()%>/candidatoServlet?comando=editar" method="POST">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Id Candidato:</label>
                     <div class="col-xs-4">
@@ -130,13 +130,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <%
-                        String municipio = new MunicipioDAO().findById(candidato.getMunicipioCandidato().getIdMunicipio()).getNomeMunicipio();
-                    %>
                     <label class="col-xs-3 control-label">Municipio:</label>
+                    <%
+                        MunicipioDAO municipioDAO = new MunicipioDAO();
+                        List<Municipio> municipios = municipioDAO.findAll();
+                    %>
                     <div class="col-xs-4">
-                        <input value="<%= municipio %>" type="text" class="form-control" id="municipioCandidato" name="municipioCandidato"/>
+                        <select class="form-control" id="municipioCandidato" name="municipioCandidato">
+                        <%for (Municipio municipio : municipios) {%>
+                        <option>
+                            <%=municipio.getIdMunicipio() + "   " + municipio.getNomeMunicipio()%>
+                        </option> 
+                        <%}%>
+                        </select>
                     </div>
+                    
                 </div>
                
                 <div class="col-md-4 col-md-offset-2">

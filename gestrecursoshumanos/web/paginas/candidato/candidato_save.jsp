@@ -20,7 +20,7 @@
     </head>
     <body>
         <div class="container">
-            <form class="form-horizontal" role="form" action="<%=request.getContextPath()%>/candidatoServlet?comando=guardar" method="POST">
+            <form class="form-horizontal" role="form" enctype="multipart/form-data" action="<%=request.getContextPath()%>/candidatoServlet?comando=guardar" method="POST">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Primeiro Nome:</label>
                     <div class="col-xs-4">
@@ -54,12 +54,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">Url:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" id="urlFotoCandidato" name="urlFotoCandidato"/>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-xs-3 control-label">Data De Nascimento:</label>
                     <div class="col-xs-4" >
                         <%
@@ -84,25 +78,25 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Telefone Fixo:</label>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="telefoneFixo" name="telefoneFixo"/>
+                        <input type="number" class="form-control" id="telefoneFixo" name="telefoneFixo"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Telemovel Principal</label>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="telefonePrincipal" name="telefonePrincipal"/>
+                        <input type="number" class="form-control" id="telefonePrincipal" name="telefonePrincipal"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Telemovel Secundario:</label>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="telefoneSecundario" name="telefoneSecundario"/>
+                        <input type="number" class="form-control" id="telefoneSecundario" name="telefoneSecundario"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Rua:</label>
                     <div class="col-xs-4">
-                        <input type="text" class="form-control" id="ruaCandidato" name="ruaCandidato"/>
+                        <input type="number" class="form-control" id="ruaCandidato" name="ruaCandidato"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -127,11 +121,12 @@
                         <select class="form-control" id="municipioCandidato" name="municipioCandidato">
                         <%for (Municipio municipio : municipios) {%>
                         <option>
-                            <%=municipio.getIdMunicipio() + " " + municipio.getNomeMunicipio()%>
+                            <%=municipio.getIdMunicipio() + "   " + municipio.getNomeMunicipio()%>
                         </option> 
                         <%}%>
                         </select>
                     </div>
+                    
                 </div>
                
                 <div class="col-md-4 col-md-offset-2">
