@@ -58,4 +58,23 @@
  * o metodo de uso na pagina jsp nao difere da encontrada no livro pagina 95
  * 
  * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ * 
+ * * OBS - 04/08/2017 - Vivaldo Mendes Cândido
+ * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ 
+ * >>>>(Implementacao)Erro ao executar paginas JSP
+ * 
+ * Prof. Estou a ter um erro estranho a executar algumas paginas jsp,
+ * gostaria que o prof desse uma olhada e me desse um feedback sobre esta situação.
+ * 
+ * Ao executar a pagina web funcionario por exemplo emite o seguinte erro na consola: 
+ * 
+ *  javac: invalid flag: -Xmx512m
+    Usage: javac <options> <source files>
+    use -help for a list of possible options
+    C:\Users\Viv Mendes\Documents\NetBeansProjects\gestrecursoshumanos\gestrecursoshumanos\nbproject\build-impl.xml:978: The following error occurred while executing this line:
+    C:\Users\Viv Mendes\Documents\NetBeansProjects\gestrecursoshumanos\gestrecursoshumanos\nbproject\build-impl.xml:321: Compile failed; see the compiler error output for details.
+    BUILD FAILED (total time: 1 second)
+ * 
+ * xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
  */
