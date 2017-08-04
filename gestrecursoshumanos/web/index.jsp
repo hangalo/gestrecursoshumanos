@@ -27,8 +27,21 @@
             <div class="row">
                 <div class="col-sm-4">
                     <h3>Gestão de expediente</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                    <h3>Funcionarios</h3>
+                    <a href="paginas/funcionario/funcionario.jsp">Novo Funcionario</a>
+                    <br/>
+                    <a href="paginas/funcionario/funcionario_listar.jsp">Listar Funcionario</a>
+                     <h3>Candidado</h3>
+                     <a href="paginas/candidato/candidato_save.jsp">Novo Candidato</a>
+                     <br/>
+                     <a href="paginas/candidato/candidato_listar.jsp">Listagem dos candidatos</a>
+                     
+                      <h3>Empresa</h3>
+                      <a href="paginas/empresa/empresa_save.jsp">Nova empresa</a>
+                      <br/>
+                      <a href="paginas/empresa/empresa_listar.jsp">Listagem Empresa</a>
+                     <br/>
+                    
                 </div>
                 <div class="col-sm-4">
                     <h3>Gestão de documentos</h3>

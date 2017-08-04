@@ -18,7 +18,9 @@
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
         <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js">
-            $(document).ready(function(){
+           
+    
+    $(document).ready(function(){
                 var tmp = document.getElementById("provincia");
                 tmp.onchange(function(){
                     $.get("<%=request.getContextPath()%>/fillLinkedComboBoxServlet?tabela=municipio&idparent=" + tmp.value,
