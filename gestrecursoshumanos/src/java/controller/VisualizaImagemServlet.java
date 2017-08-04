@@ -63,6 +63,7 @@ public class VisualizaImagemServlet extends HttpServlet {
     }
     
     private void loadImageBD(HttpServletRequest request, HttpServletResponse response){
+        
         try {
             response.setContentType("image/jpg; image/png");
             FotoGenericDAO fotoGenericDAO = (FotoGenericDAO)request.getSession().getAttribute("obj");
