@@ -27,7 +27,7 @@
         %>
         <table class="table">
             <thead>
-                <tr class="danger">
+                <tr class="">
                     <th>Id</th>
                     <th>Nome</th>
                     <th>Data De Criacao</th>
@@ -51,7 +51,7 @@
             </thead>
             <tbody>
                 <%for (Empresa empresa : empresas) {%>
-                <tr class="success">
+                <tr class="active">
                     <td><%=empresa.getId_empresa()%></td>
                     <td><%=empresa.getNome_empresa()%></td>
                     <td><%=empresa.getData_cricacao()%></td>
@@ -74,10 +74,16 @@
                               width="60" height="60" </td>
                     <td><a href="<%=request.getContextPath()%>/empresaServlet?comando=prepara_editar&id_empresa=<%=empresa.getId_empresa()%>">
                             <img src="<%=request.getContextPath()%>/imagens/edit.png" /></a>
-                    <a href="<%=request.getContextPath()%>/empresaServlet?comando=eliminar&id_empresa=<%=empresa.getId_empresa()%>">
+                        <a href="<%=request.getContextPath()%>/empresaServlet?comando=eliminar&id_empresa=<%=empresa.getId_empresa()%>">
                             <img src="<%=request.getContextPath()%>/imagens/delete.png" /></a></td>
                             <%}%>
+
+
                 </tr>
+
+
+
+
 
 
 
