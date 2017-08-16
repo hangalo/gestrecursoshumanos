@@ -41,21 +41,13 @@
                     <th>Telemovel Secundario</th>
                     <th>Fax Principal</th>
                     <th>Fax Secundario</th>
-                    <!--<th>Municipio</th>-->
+                    <th>Municipio</th>
                     <th>Logo</th>
                 </tr>
             </thead>
             <tbody>
                 <%for (Empresa empresa : empresas) {%>
                 <tr>
-                    <%
-                     /*7777777777777777777777777777777777777777777777777777777
-                        Municipio municipio = new Municipio();
-                        MunicipioDAO municipioDAO = new MunicipioDAO();
-                        municipio = municipioDAO.findById(i++);*/
-                     
-                    %>
-                    
                     <td><%=empresa.getId_empresa()%></td>
                     <td><%=empresa.getNome_empresa()%></td>
                     <td><%=empresa.getSigla_empresa()%></td>
@@ -72,6 +64,7 @@
                     <td><%=empresa.getTelemovel_secundario()%></td>
                     <td><%=empresa.getFax_principal()%></td>
                     <td><%=empresa.getFax_secundario()%></td>
+                    <td><%=empresa.getMunicipio().getNomeMunicipio() %></td>
                     
                     <td> <img src="<%=request.getContextPath()%>/showImageEmpresa?ficheiro=<%=empresa.getUrl_logo_empresa()%>" 
                               width="60" height="60" </td>

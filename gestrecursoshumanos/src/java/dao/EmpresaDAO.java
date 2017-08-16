@@ -36,7 +36,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             + "fax_secundario = ?, id_municipio = ? WHERE id_empresa = ?";
     private static final String ELIMINAR = "DELETE FROM empresa WHERE id_empresa = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM empresa where id_empresa = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM empresa ORDER BY id_empresa";
+    private static final String LISTAR_TUDO = "SELECT * FROM empresa INNER JOIN municipio on empresa.id_municipio = municipio.id_municipio ORDER BY id_empresa";
 
     PreparedStatement ps;
     Connection conn;
@@ -53,7 +53,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             ps = conn.prepareStatement(INSERIR);
 
             ps.setString(1, empresa.getNome_empresa());
-            ps.setString(2,  empresa.getSigla_empresa() ); 
+            ps.setString(2, empresa.getSigla_empresa());
             ps.setBytes(3, empresa.getLogo_empresa());
             ps.setString(4, empresa.getUrl_logo_empresa());
             ps.setDate(5, empresa.getData_cricacao());
@@ -70,19 +70,19 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             ps.setString(16, empresa.getFax_principal());
             ps.setString(17, empresa.getFax_secundario());
             ps.setInt(18, empresa.getMunicipio().getIdMunicipio());
-            
+
             ps.execute();
 
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados: " + e.getMessage());
-         } finally {
+        } finally {
             Conexao.closeConnection(conn, ps);
         }
     }
 
     @Override
     public void update(Empresa empresa) {
-       
+
         if (empresa == null) {
             System.err.println("O valor passado nao pode ser nulo");
         }
@@ -106,7 +106,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             ps.setString(15, empresa.getTelemovel_secundario());
             ps.setString(16, empresa.getFax_principal());
             ps.setString(17, empresa.getFax_secundario());
-             ps.setInt(18, empresa.getMunicipio().getIdMunicipio());
+            ps.setInt(18, empresa.getMunicipio().getIdMunicipio());
 
             ps.setInt(19, empresa.getId_empresa());
             ps.executeUpdate();
@@ -121,7 +121,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
     @Override
     public void delete(Empresa empresa) {
-       
+
         if (empresa == null) {
             System.err.println("O valor passado nao pode ser nulo");
         }
@@ -161,6 +161,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             empresa.setTelemovel_secundario(rs.getString("telemovel_secundario"));
             empresa.setFax_principal(rs.getString("fax_principal"));
             empresa.setFax_secundario(rs.getString("fax_secundario"));
+            empresa.getMunicipio().setNomeMunicipio(rs.getString("nome_municipio"));
 
         } catch (SQLException ex) {
             System.err.println("Erro ao carregar dados: " + ex.getLocalizedMessage());
@@ -169,7 +170,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
     @Override
     public Empresa findById(Integer id) {
-        
+
         Empresa empresa = new Empresa();
         try {
             conn = Conexao.getConnection();
@@ -191,7 +192,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
     @Override
     public List<Empresa> findAll() {
-       
+
         List<Empresa> empresas = new ArrayList<>();
         try {
             conn = Conexao.getConnection();
@@ -209,4 +210,6 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
         }
         return empresas;
     }
+    
+     
 }
