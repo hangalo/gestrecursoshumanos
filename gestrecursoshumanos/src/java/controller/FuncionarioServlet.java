@@ -88,10 +88,12 @@ public class FuncionarioServlet extends HttpServlet {
         funcionario.setTelemovelSecundario(request.getParameter("ftelemovels"));
         funcionario.setEmailPrincipal(request.getParameter("femail"));
         funcionario.setEmailSecundario(request.getParameter("femaila"));
-        funcionario.setMunicipio( new Municipio(Integer.parseInt(request.getParameter("municipio"))));
+//        funcionario.setMunicipio( new Municipio(Integer.parseInt(request.getParameter("municipio"))));
         funcionario.setBairroFuncionario( request.getParameter("bairro"));
         funcionario.setRuaFuncionario(request.getParameter("frua"));
         funcionario.setCasaFuncionario(request.getParameter("fcasa"));
+        funcionario.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("idMunicipio")));
+
     }
     
     private void doUpload(Part part, HttpServletRequest request) {

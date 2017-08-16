@@ -91,7 +91,7 @@
                             "nomeCb",
                             "id_provincia",
                             "nome_provincia",
-                            "onchange='selectChange(this, save_empresa.txtNomeMunicipio, municipioText, municipioRelac, municipioValue)'",
+                            "onchange='selectChange(this, save_empresa.idMunicipio, municipioText, municipioRelac, municipioValue)'",
                             null)%>
                 </div>
             </div>
@@ -102,10 +102,10 @@
                             "save_empresa",
                             "municipio",
                             "txtNomeProvincia",
-                            "txtNomeMunicipio",
+                            "idMunicipio",
                             "id_municipio",
                             "nome_municipio",
-                        "id_provincia",
+                            "id_provincia",
                         "", null)%>
 
                 </div>

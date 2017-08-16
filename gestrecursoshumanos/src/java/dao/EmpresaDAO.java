@@ -36,7 +36,10 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             + "fax_secundario = ?, id_municipio = ? WHERE id_empresa = ?";
     private static final String ELIMINAR = "DELETE FROM empresa WHERE id_empresa = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM empresa where id_empresa = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM empresa INNER JOIN municipio on empresa.id_municipio = municipio.id_municipio ORDER BY id_empresa";
+    private static final String LISTAR_TUDO = " SELECT * from empresa as e INNER join municipio as m on "
+                                              + "e.id_municipio= m.id_municipio Inner join provincia as "
+                                              + "p on p.id_provincia=m.id_provincia ORDER BY "
+                                              + "id_empresa ASC;";
 
     PreparedStatement ps;
     Connection conn;
@@ -162,6 +165,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             empresa.setFax_principal(rs.getString("fax_principal"));
             empresa.setFax_secundario(rs.getString("fax_secundario"));
             empresa.getMunicipio().setNomeMunicipio(rs.getString("nome_municipio"));
+            empresa.getMunicipio().getProvinciaMunicipio().setNomeProvincia(rs.getString("nome_provincia"));
 
         } catch (SQLException ex) {
             System.err.println("Erro ao carregar dados: " + ex.getLocalizedMessage());
