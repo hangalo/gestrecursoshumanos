@@ -24,8 +24,8 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             + "logo_empresa,url_logo_empresa,data_cricacao,casa_empresa,rua_empresa,"
             + "bairro_empresa,distrito_empresa,home_page,email_princiapal,"
             + "telefone_princiapl,telefone_secundario,telemovel_principal,"
-            + "telemovel_secundario,fax_principal,fax_secundario) "
-            + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            + "telemovel_secundario,fax_principal,fax_secundario,id_municipio) "
+            + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String ACTUALIZAR = "UPDATE empresa set nome_empresa = ?, sigla_empresa = ?,"
             + " logo_empresa = ?, url_logo_empresa = ?, "
             + "data_cricacao = ?, casa_empresa = ?, rua_empresa = ?,bairro_empresa = ?,"
@@ -33,7 +33,7 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             + "email_princiapal = ?, telefone_princiapl = ?,"
             + " telefone_secundario = ?, telemovel_principal = ?, "
             + "telemovel_secundario = ?, fax_principal = ?, "
-            + "fax_secundario = ? WHERE id_empresa = ?";
+            + "fax_secundario = ?, id_municipio = ? WHERE id_empresa = ?";
     private static final String ELIMINAR = "DELETE FROM empresa WHERE id_empresa = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM empresa where id_empresa = ?";
     private static final String LISTAR_TUDO = "SELECT * FROM empresa ORDER BY id_empresa";
@@ -69,6 +69,8 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             ps.setString(15, empresa.getTelemovel_secundario());
             ps.setString(16, empresa.getFax_principal());
             ps.setString(17, empresa.getFax_secundario());
+            ps.setInt(18, empresa.getMunicipio().getIdMunicipio());
+            
             ps.execute();
 
         } catch (SQLException e) {
@@ -104,8 +106,9 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
             ps.setString(15, empresa.getTelemovel_secundario());
             ps.setString(16, empresa.getFax_principal());
             ps.setString(17, empresa.getFax_secundario());
+             ps.setInt(18, empresa.getMunicipio().getIdMunicipio());
 
-            ps.setInt(18, empresa.getId_empresa());
+            ps.setInt(19, empresa.getId_empresa());
             ps.executeUpdate();
 
         } catch (Exception ex) {

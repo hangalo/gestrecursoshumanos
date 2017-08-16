@@ -33,8 +33,11 @@ public class Empresa {
     
     private byte[] logo_empresa;
     private String nameLogoEmpresa;
+    private Municipio municipio;
     
-    public Empresa() {}
+    public Empresa() {
+        municipio = new Municipio();
+    }
 
     public Empresa(Integer id_empresa, String nome_empresa, String sigla_empresa, byte[] logo_empresa, String url_logo_empresa, Date data_cricacao, String casa_empresa, String rua_empresa, String bairro_empresa, String distrito_empresa, String home_page, String email_princiapal, String telefone_princiapl, String telefone_secundario, String telemovel_principal, String telemovel_secundario, String fax_principal, String fax_secundario) {
         this.id_empresa = id_empresa;
@@ -321,5 +324,19 @@ public class Empresa {
      */
     public void setNameLogoEmpresa(String nameLogoEmpresa) {
         this.nameLogoEmpresa = nameLogoEmpresa;
+    }
+
+    /**
+     * @return the municipio
+     */
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    /**
+     * @param municipio the municipio to set
+     */
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
     }
 }

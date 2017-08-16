@@ -4,6 +4,7 @@
     Author     : FranciscoMiguel
 --%>
 
+<%@page import="util.HtmlComboBoxes"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="modelo.Empresa"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,6 +15,37 @@
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
         <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript">
+
+            function selectChange(control, controlToPopulate, ItemArray, GroupArray, CodArray)
+            {
+
+                var myEle;
+                var x;
+                var arrItemsValue;
+                for (var q = controlToPopulate.options.length; q >= 0; q--)
+                    controlToPopulate.options[q] = null;
+                myEle = document.createElement("option");
+                controlToPopulate.appendChild(myEle);
+                myEle.value = 0;
+                myEle.text = "-- Escolha --";
+                myEle.selectedIndex = "0";
+
+
+                for (x = 0; x < ItemArray.length; x++)
+                {
+                    if (GroupArray[x] == control.options[control.selectedIndex].value)
+                    {
+                        myEle = document.createElement("OPTION");
+
+                        controlToPopulate.appendChild(myEle);
+                        myEle.value = CodArray[x];
+                        myEle.text = ItemArray[x];
+                    }
+                }
+            }
+
+        </script>   
 
     </head>
 
@@ -26,7 +58,7 @@
         <div class="container">
             <h3 style="text-align: center">Ficha de Alteracao Da Empresa</h3>
             <br/>
-            <form class="form-horizontal" enctype="multipart/form-data" role="form" action="<%=request.getContextPath()%>/empresaServlet?comando=editar" method="POST">
+            <form name="save_empresa" class="form-horizontal" enctype="multipart/form-data" role="form" action="<%=request.getContextPath()%>/empresaServlet?comando=editar" method="POST">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Id:</label>
                     <div class="col-xs-5" >
@@ -62,8 +94,35 @@
                             SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
                             String dataString = formatDate.format(dateUtil);
                         %>
-                        <input type="date" class="form-control" id="data_cricacao"
+                        <input type="text" class="form-control" id="data_cricacao"
                                name="data_cricacao" placeholder="dd/MM/yyyy" value="<%= dataString%>" readonly="readonly"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">Provincia</label>
+                    <div class="col-xs-4" >
+                        <%= new HtmlComboBoxes().select("provincia",
+                                "save_empresa",
+                                "nomeCb",
+                                "id_provincia",
+                                "nome_provincia",
+                                "onchange='selectChange(this, save_empresa.txtNomeMunicipio, municipioText, municipioRelac, municipioValue)'",
+                                null)%>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">Municipio</label>
+                    <div class="col-xs-4" >
+                        <%= new HtmlComboBoxes().selectDependente("municipio",
+                                "save_empresa",
+                                "municipio",
+                                "txtNomeProvincia",
+                                "txtNomeMunicipio",
+                                "id_municipio",
+                                "nome_municipio",
+                                "id_provincia",
+                                "", null)%>
+
                     </div>
                 </div>
                 <div class="form-group">

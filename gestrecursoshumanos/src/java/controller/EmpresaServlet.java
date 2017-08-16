@@ -76,12 +76,12 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setTelemovel_secundario(request.getParameter("telemovel_secundario"));
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
+                empresa.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("txtNomeMunicipio")));
                 Part ficheiro = request.getPart("logo_empresa");
                 if (ficheiro != null) {
                     byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
-                     empresa.setLogo_empresa(ficheiroImagem);
-                     empresa.setUrl_logo_empresa(ficheiro.getSubmittedFileName());
-                    // System.err.println("Depois");
+                    empresa.setLogo_empresa(ficheiroImagem);
+                    empresa.setUrl_logo_empresa(ficheiro.getSubmittedFileName());
                     doUpload(ficheiro);
                 }
                 empresaDao.save(empresa);
@@ -104,11 +104,13 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setTelemovel_secundario(request.getParameter("telemovel_secundario"));
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
+                empresa.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("txtNomeMunicipio")));
+
                 Part ficheiro = request.getPart("logo_empresa");
                 if (ficheiro != null) {
                     byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
-                     empresa.setLogo_empresa(ficheiroImagem);
-                     empresa.setUrl_logo_empresa(ficheiro.getSubmittedFileName());
+                    empresa.setLogo_empresa(ficheiroImagem);
+                    empresa.setUrl_logo_empresa(ficheiro.getSubmittedFileName());
                     doUpload(ficheiro);
                 }
                 empresaDao.update(empresa);

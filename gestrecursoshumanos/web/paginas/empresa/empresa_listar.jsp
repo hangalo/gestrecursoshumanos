@@ -21,7 +21,7 @@
             EmpresaDAO empresaDAO = new EmpresaDAO();
             List<Empresa> empresas = empresaDAO.findAll();
         %>
-        
+
         <table class=" table table-hover">
             <thead>
                 <tr>
@@ -41,16 +41,25 @@
                     <th>Telemovel Secundario</th>
                     <th>Fax Principal</th>
                     <th>Fax Secundario</th>
+                    <!--<th>Municipio</th>-->
                     <th>Logo</th>
                 </tr>
             </thead>
             <tbody>
                 <%for (Empresa empresa : empresas) {%>
                 <tr>
+                    <%
+                     /*7777777777777777777777777777777777777777777777777777777
+                        Municipio municipio = new Municipio();
+                        MunicipioDAO municipioDAO = new MunicipioDAO();
+                        municipio = municipioDAO.findById(i++);*/
+                     
+                    %>
+                    
                     <td><%=empresa.getId_empresa()%></td>
                     <td><%=empresa.getNome_empresa()%></td>
-                    <td><%=empresa.getSigla_empresa() %></td>
-                    <td><%=empresa.getData_cricacao() %></td>
+                    <td><%=empresa.getSigla_empresa()%></td>
+                    <td><%=empresa.getData_cricacao()%></td>
                     <td><%=empresa.getCasa_empresa()%></td>
                     <td><%=empresa.getRua_empresa()%></td>
                     <td><%=empresa.getBairro_empresa()%></td>
@@ -72,7 +81,8 @@
                     <img src="<%=request.getContextPath()%>/imagens/edit.png" /></a></td>
             <td><a href="<%=request.getContextPath()%>/empresaServlet?comando=eliminar&id_empresa=<%=empresa.getId_empresa()%>">
                     <img src="<%=request.getContextPath()%>/imagens/delete.png" /></a></td>
-            <%}%>
+                    <%}%>
+                    
         </tbody>
     </table>
 
