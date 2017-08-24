@@ -29,18 +29,17 @@
             
             function populateChildDropdown() {
             var dd = $('#municipio');
-            alert("3");
             $.getJSON('<%=request.getContextPath()%>/funcionarioServlet?comando=ddl&dd=' + $('#provincia :selected').val(), function(opts) {
                
                 $('#municipio').empty(); // Clear old options first.
                 
                 if (opts) {
-                    alert(opts);
                     $.each(opts, function(index) {
                         dd.append($('<option/>').val(opts[index].idMunicipio).text(opts[index].nomeMunicipio));
                     });
-                } else {
-                    dd.append($('<option/>').text("Please select the parent DD"));
+                } 
+                if($('municipio').length === 0) {
+                    dd.append($('<option/>').text("Provincia Sem Municipios"));
                 }
             });
         }
@@ -141,9 +140,9 @@
                         <div class="form-group col-md-5 input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                             <select id="municipio" name="municipio" class="form-control">
-                                <% for(Municipio tmp : municipios){%>
-                                <option value="<%= tmp.getIdMunicipio()%>"><%=tmp.getNomeMunicipio()%></option>
-                                <% }%>
+                                <% /*for(Municipio tmp : municipios){%>
+                                <!--<option value="<%= tmp.getIdMunicipio()%>"><%=tmp.getNomeMunicipio()%></option>-->
+                                <% }*/%>
                             </select>
                         </div>
                     </div>
