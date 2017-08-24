@@ -28,16 +28,16 @@
                 <div class="col-sm-4">
                     <h3>Gestão de expediente</h3>
                     <h3>Funcionarios</h3>
-                    <a href="paginas/funcionario/funcionario.jsp">Novo Funcionario</a>
+                    <a href="paginas/funcionario/funcionario_guardar.jsp">Novo Funcionario</a>
                     <br/>
                     <a href="paginas/funcionario/funcionario_listar.jsp">Listar Funcionario</a>
                      <h3>Candidado</h3>
-                     <a href="paginas/candidato/candidato_save.jsp">Novo Candidato</a>
+                     <a href="paginas/candidato/candidato_guardar.jsp">Novo Candidato</a>
                      <br/>
                      <a href="paginas/candidato/candidato_listar.jsp">Listagem dos candidatos</a>
                      
                       <h3>Empresa</h3>
-                      <a href="paginas/empresa/empresa_save.jsp">Nova empresa</a>
+                      <a href="paginas/empresa/empresa_guardar.jsp">Nova empresa</a>
                       <br/>
                       <a href="paginas/empresa/empresa_listar.jsp">Listagem Empresa</a>
                      <br/>
