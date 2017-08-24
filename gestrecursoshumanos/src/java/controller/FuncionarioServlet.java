@@ -39,12 +39,13 @@ public class FuncionarioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        fillFuncionario(request);
-        Part ficheiro = request.getPart("fimagem");
+        
         String comando = request.getParameter("comando");
         
         
         if (comando.equalsIgnoreCase("guardar")){
+            fillFuncionario(request);
+            Part ficheiro = request.getPart("fimagem");
             if (ficheiro != null) {
                 byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
                 funcionario.setFotoFuncionario(ficheiroImagem);
@@ -55,13 +56,25 @@ public class FuncionarioServlet extends HttpServlet {
             response.sendRedirect("paginas/funcionario/funcionario.jsp");
         } 
         else if (comando.equalsIgnoreCase("editar")) {
+            fillFuncionario(request);
+            Part ficheiro = request.getPart("fimagem");
+            if (ficheiro != null) {
+                byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
+                funcionario.setFotoFuncionario(ficheiroImagem);
+                funcionario.setUrlFotoFuncionario(ficheiro.getSubmittedFileName());
+                doUpload(ficheiro, request);
+            }
+            funcionarioDAO.update(funcionario);
             response.sendRedirect("paginas/funcionario/funcionario_listar.jsp");
         } 
         else if (comando.equalsIgnoreCase("eliminar")) {
             response.sendRedirect("paginas/funcionario/funcionario_listar.jsp");
         } 
         else if (comando.equalsIgnoreCase("prepara_editar")) {
-            //request.setAttribute("categoriaFuncionario", categoriaFuncionario);
+            System.out.println("Estado: " + request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
+            Funcionario tmp = funcionarioDAO.findById(id);
+            request.setAttribute("funcionario", tmp);
             RequestDispatcher rd = request.getRequestDispatcher("/paginas/funcionario/funcionario_editar.jsp");
             rd.forward(request, response);
         } 
@@ -70,10 +83,7 @@ public class FuncionarioServlet extends HttpServlet {
         } 
         else if (comando.equalsIgnoreCase("principal")) {
             response.sendRedirect("paginas/funcionario/index.jsp");
-        }
-        
-        
-        
+        }        
     }
     
     public void fillFuncionario(HttpServletRequest request){
@@ -89,7 +99,7 @@ public class FuncionarioServlet extends HttpServlet {
         funcionario.setEmailPrincipal(request.getParameter("femail"));
         funcionario.setEmailSecundario(request.getParameter("femaila"));
         funcionario.setMunicipio( new Municipio(Integer.parseInt(request.getParameter("municipio"))));
-        funcionario.setBairroFuncionario( request.getParameter("bairro"));
+        funcionario.setBairroFuncionario( request.getParameter("fbairro"));
         funcionario.setRuaFuncionario(request.getParameter("frua"));
         funcionario.setCasaFuncionario(request.getParameter("fcasa"));
     }
