@@ -76,7 +76,7 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setTelemovel_secundario(request.getParameter("telemovel_secundario"));
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
-                empresa.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("txtNomeMunicipio")));
+                empresa.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("idMunicipio")));
                 Part ficheiro = request.getPart("logo_empresa");
                 if (ficheiro != null) {
                     byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
@@ -104,7 +104,7 @@ public class EmpresaServlet extends HttpServlet {
                 empresa.setTelemovel_secundario(request.getParameter("telemovel_secundario"));
                 empresa.setFax_principal(request.getParameter("fax_principal"));
                 empresa.setFax_secundario(request.getParameter("fax_secundario"));
-                empresa.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("txtNomeMunicipio")));
+                empresa.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("idMunicipio")));
 
                 Part ficheiro = request.getPart("logo_empresa");
                 if (ficheiro != null) {

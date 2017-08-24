@@ -33,7 +33,9 @@ public class Candidato {
     
 //construtor vazio para inicializar os atributos da classe
     public Candidato() {
+       
         this(0, "", "", "", "", null, "", null, "", "", "", "", "", "", "", "", null);
+        municipioCandidato = new Municipio();
     }
 //Declaraco do segundo construtor que atribui os valor que recebe aos atributos
 

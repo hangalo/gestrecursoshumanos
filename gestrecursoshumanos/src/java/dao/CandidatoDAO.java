@@ -57,7 +57,7 @@ public class CandidatoDAO implements GenericoDAO<Candidato> {
 
     private static final String ELIMINAR = "DELETE FROM candidato WHERE id_candidato = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM candidato where id_candidato = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM candidato ORDER BY primeiro_nome_candidato ASC;";
+    private static final String LISTAR_TUDO = "SELECT * FROM candidato INNER JOIN municipio ON candidato.id_municipio=municipio.id_municipio ORDER BY primeiro_nome_candidato ASC;";
 
     PreparedStatement ps;
     Connection conn;
@@ -247,7 +247,6 @@ public class CandidatoDAO implements GenericoDAO<Candidato> {
     @Override
     public void popularComDados(Candidato candidato, ResultSet resultSet) {
         try {
-
             candidato.setIdCandidato(resultSet.getInt("id_candidato"));
             candidato.setPrimeiroNomeCandidato((resultSet.getString("primeiro_nome_candidato")));
             candidato.setSegundoNomeCandidato((resultSet.getString("segundo_nome_candidato")));
@@ -264,7 +263,7 @@ public class CandidatoDAO implements GenericoDAO<Candidato> {
             candidato.setCasaCandidato((resultSet.getString("casa_candidato")));
             candidato.setRuaFuncionario((resultSet.getString("rua_funcionario")));
             candidato.setBairroCandidato((resultSet.getString("bairro_candidato")));
-            candidato.setMunicipioCandidato(new Municipio(resultSet.getInt("id_municipio")));
+            candidato.getMunicipioCandidato().setNomeMunicipio(resultSet.getString("nome_municipio"));
         } catch (SQLException ex) {
             System.out.println("Erro ao ler dados: " + ex.getMessage());
         }

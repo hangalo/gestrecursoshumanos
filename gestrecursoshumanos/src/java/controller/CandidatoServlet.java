@@ -70,7 +70,7 @@ public class CandidatoServlet extends HttpServlet {
                 java.sql.Date date = new java.sql.Date(DateUtil.strToDate(request.getParameter("dataNascimento")).getTime());
                 candidato.setDataNascimentoCandidato(date);
                 
-                candidato.setMunicipioCandidato(new MunicipioDAO().findById(Integer.parseInt(request.getParameter("municipioCandidato").substring(0, 2).trim())));
+                //candidato.setMunicipioCandidato(new MunicipioDAO().findById(Integer.parseInt(request.getParameter("municipioCandidato").substring(0, 2).trim())));
                 candidato.setBairroCandidato(request.getParameter("bairroCandidato"));
                 candidato.setRuaFuncionario(request.getParameter("ruaCandidato"));
                 candidato.setCasaCandidato(request.getParameter("casaCandidato"));
@@ -81,6 +81,8 @@ public class CandidatoServlet extends HttpServlet {
                 candidato.setTelefoneFixo(request.getParameter("telefoneFixo"));
                 candidato.setTelemovelPrincipal(request.getParameter("telefonePrincipal"));
                 candidato.setTelemovelSecundario(request.getParameter("telefoneSecundario"));
+                candidato.getMunicipioCandidato().setIdMunicipio(Integer.parseInt(request.getParameter("idMunicipio")));
+
                 
                 Part ficheiro = request.getPart("fotoCandidato");
                 if (ficheiro != null) {

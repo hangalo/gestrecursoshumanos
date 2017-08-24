@@ -32,6 +32,7 @@ public class Funcionario {
     private Municipio municipio;
 
     public Funcionario() {
+        municipio = new Municipio();
     }
     
     public Funcionario(int id) {
