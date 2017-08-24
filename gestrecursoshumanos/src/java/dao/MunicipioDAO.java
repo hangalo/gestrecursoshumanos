@@ -25,7 +25,9 @@ public class MunicipioDAO implements GenericoDAO<Municipio>{
     private static final String ACTUALIZAR = "UPDATE municipio set nome_municipio = ?, id_provincia = ? WHERE id_municipio = ?";
     private static final String ELIMINAR = "DELETE FROM municipio WHERE id_municipio = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM municipio where id_municipio = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM municipio ORDER BY nome_municipio ASC;";
+    private static final String LISTAR_TUDO = "SELECT * FROM municipio ORDER BY nome_municipio ASC;";   
+    private static final String LISTAR_BY_ID = "SELECT * FROM municipio where id_provincia = ? ORDER BY nome_municipio ASC;";
+
     
     Connection conn;
     PreparedStatement ps;
@@ -114,6 +116,27 @@ public class MunicipioDAO implements GenericoDAO<Municipio>{
             ps = conn.prepareStatement(LISTAR_TUDO);
             rs = ps.executeQuery();
             while (rs.next()) {
+                Municipio municipio = new Municipio();
+                popularComDados(municipio, rs);
+                municipios.add(municipio);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
+        } finally {
+            Conexao.closeConnection(conn, ps, rs);
+        }
+        return municipios;
+    }
+    
+    public List<Municipio> findAll(int idProvincia) {
+        List<Municipio> municipios = new ArrayList<>();
+        try {
+            conn = Conexao.getConnection();
+            ps = conn.prepareStatement(LISTAR_BY_ID);
+            ps.setInt(1, idProvincia);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                
                 Municipio municipio = new Municipio();
                 popularComDados(municipio, rs);
                 municipios.add(municipio);

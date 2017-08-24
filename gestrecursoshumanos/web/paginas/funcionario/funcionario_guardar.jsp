@@ -4,6 +4,7 @@
     Author     : Viv Mendes
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page import="util.HtmlComboBoxes"%>
 <%@page import="modelo.Municipio"%>
 <%@page import="dao.MunicipioDAO"%>
@@ -16,13 +17,33 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css">
-        <script src="<%=request.getContextPath()%>/js/bootstrap.min.js">
-          
+        <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js">      
         </script>
-        <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js">
+        <script>
+            $(document).ready(function() {
+                $('#provincia').change(function() { populateChildDropdown();  });
+            });
+            
+            function populateChildDropdown() {
+            var dd = $('#municipio');
+            alert("3");
+            $.getJSON('<%=request.getContextPath()%>/funcionarioServlet?comando=ddl&dd=' + $('#provincia :selected').val(), function(opts) {
+               
+                $('#municipio').empty(); // Clear old options first.
+                
+                if (opts) {
+                    alert(opts);
+                    $.each(opts, function(index) {
+                        dd.append($('<option/>').val(opts[index].idMunicipio).text(opts[index].nomeMunicipio));
+                    });
+                } else {
+                    dd.append($('<option/>').text("Please select the parent DD"));
+                }
+            });
+        }
         </script>
         <title>Funcionario| Cadastro</title>
     </head>
@@ -108,6 +129,7 @@
                 
                     <div class="frow finput-group">
                         <div class="form-group col-md-6 input-group">
+                            <input type="hidden" id="idProvinciaActual" value="1">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                             <select id="provincia" name="provincia" class="form-control">
                                 <% for(Provincia tmp : provincias){%>
@@ -118,7 +140,7 @@
 
                         <div class="form-group col-md-5 input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                            <select name="municipio" class="form-control">
+                            <select id="municipio" name="municipio" class="form-control">
                                 <% for(Municipio tmp : municipios){%>
                                 <option value="<%= tmp.getIdMunicipio()%>"><%=tmp.getNomeMunicipio()%></option>
                                 <% }%>

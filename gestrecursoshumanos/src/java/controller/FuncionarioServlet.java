@@ -5,11 +5,16 @@
  */
 package controller;
 
+import com.google.gson.Gson;
 import dao.FuncionarioDAO;
+import dao.MunicipioDAO;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -84,6 +89,15 @@ public class FuncionarioServlet extends HttpServlet {
         else if (comando.equalsIgnoreCase("principal")) {
             response.sendRedirect("paginas/funcionario/index.jsp");
         }        
+        else if(comando.equalsIgnoreCase("ddl")){
+            System.out.println("Request State: " + request.getParameter("dd"));
+            int parameter = Integer.parseInt(request.getParameter("dd"));
+            ArrayList options = (ArrayList)new MunicipioDAO().findAll(parameter);
+            String json = new Gson().toJson(options);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
     }
     
     public void fillFuncionario(HttpServletRequest request){
