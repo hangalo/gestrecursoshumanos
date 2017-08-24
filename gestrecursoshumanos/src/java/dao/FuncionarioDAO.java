@@ -38,16 +38,16 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario>, FotoGenericDAO 
                             "F.ultimo_nome_funcionario, F.alcunha_funcionario, F.data_nascimento_funcionario, F.foto_funcionario, " +
                             "F.url_foto_funcionario, F.telefone_funcionario, F.telemovel_princiapal, F.telemovel_secundario, " +
                             "F.email_principal, F.email_secundario, F.casa_funcionario, F.rua_funcionario, F.bairro_funcionario, " +
-                            "M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M.id_municipio ORDER BY primeiro_nome_funcionario where id_funcionario = ?";
+                            "M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M.id_municipio where id_funcionario = ?";
     /*SELECT F.primeiro_nome_funcionario, F.segundo_nome_funcionario,F.ultimo_nome_funcionario, F.alcunha_funcionario, F.data_nascimento_funcionario, F.foto_funcionario,
 F.url_foto_funcionario, F.telefone_funcionario, F.telemovel_princiapal, F.telemovel_secundario,F.email_principal, F.email_secundario, F.casa_funcionario, F.rua_funcionario, F.bairro_funcionario,
 M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M.id_municipio ORDER BY primeiro_nome_funcionario;*/
-    private static final String LISTAR_TUDO = "SELECT F.primeiro_nome_funcionario, F.segundo_nome_funcionario, " +
+    private static final String LISTAR_TUDO = "SELECT F.id_funcionario, F.primeiro_nome_funcionario, F.segundo_nome_funcionario, " +
                             "F.ultimo_nome_funcionario, F.alcunha_funcionario, F.data_nascimento_funcionario, F.foto_funcionario, " +
                             "F.url_foto_funcionario, F.telefone_funcionario, F.telemovel_princiapal, F.telemovel_secundario, " +
                             "F.email_principal, F.email_secundario, F.casa_funcionario, F.rua_funcionario, F.bairro_funcionario, " +
-                            "M.nome_municipio FROM funcionario F inner join municipio M ORDER BY primeiro_nome_funcionario";
-    private static final String BUSCAR_IMAGEM_POR_CODIGO = "SELECT foto_funcionario FROM funcionario inner join municipio M on id_municipio = M.id_municipio where id_funcionario = ?";
+                            "M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M.id_Municipio ORDER BY primeiro_nome_funcionario";
+    private static final String BUSCAR_IMAGEM_POR_CODIGO = "SELECT foto_funcionario FROM funcionario where id_funcionario = ?";
     
      PreparedStatement ps;
     Connection conn;
@@ -197,7 +197,7 @@ M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M
     @Override
     public void popularComDados(Funcionario funcionario, ResultSet rs){
         try {
-             funcionario.setIdFuncionario(rs.getInt("F.id_funcionario"));
+             funcionario.setIdFuncionario(rs.getInt("id_funcionario"));
              funcionario.setPrimeiroNomeFuncionario(rs.getString("F.primeiro_nome_funcionario"));
              funcionario.setSegundoNomeFuncionario(rs.getString("segundo_nome_funcionario"));
              funcionario.setUltimoNomeFuncionario(rs.getString("ultimo_nome_funcionario"));
@@ -222,6 +222,7 @@ M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M
         }
     }
     
+    @Override
     public byte[] recuperarImagem(Integer id) {
         byte[] imagem = null;
         PreparedStatement ps;

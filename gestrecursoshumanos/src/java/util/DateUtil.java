@@ -25,7 +25,11 @@ public class DateUtil {
 
         Date dataF = null;
         try {
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat dateFormat;
+            if(data.indexOf('-') >= 0)
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            else
+                dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             long timestamp = dateFormat.parse(data).getTime();
             dataF = new Date(timestamp);
         } catch (ParseException pe) {

@@ -23,9 +23,10 @@
                 
             </div>
             <div id="lista_funcionarios">
-                <table class="table table-hover">
+                <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Foto</th>
                             <th colspan="">Nome Completo</th>
                             <th>Alcunha</th>
@@ -38,12 +39,15 @@
                             <th>Bairro</th>
                             <th>Rua</th>
                             <th>Casa</th>
+                            <th>Municipio</th>
                             <th>Operações</th>
                     </tr>
                     </thead>
                     <tbody>
+                        <% int i = 0;%>
                     <% for(Funcionario tmp : funcionarioDAO.findAll()){ %>
                     <tr><% request.getSession().setAttribute("obj", new FuncionarioDAO()); %>
+                            <td><%= i++ %></td>
                             <td><img src="<%=request.getContextPath()%>/visualizaImagemServlet?id=<%=tmp.getIdFuncionario()%>&ficheiro=<%=tmp%>" width="60" height="60"> </td>
                             <td colspan=""><%= tmp.getPrimeiroNomeFuncionario() + " " + tmp.getSegundoNomeFuncionario() + " " + tmp.getUltimoNomeFuncionario() %></td>
                             <td><%= request.getAttribute("tmp") %><%= tmp.getAlcunhaFuncionario() %></td>
@@ -56,12 +60,13 @@
                             <td><%= tmp.getBairroFuncionario() %></td>
                             <td><%= tmp.getRuaFuncionario() %></td>
                             <td><%= tmp.getCasaFuncionario() %></td>
+                            <td><%= tmp.getMunicipio().getNomeMunicipio()%></td>
                             <td>
-                                <a href="">
+                                <a href="<%=request.getContextPath()%>/funcionarioServlet?comando=prepara_editar&id=<%=tmp.getIdFuncionario()%>">
                                 <img src="<%=request.getContextPath()%>/imagens/edit.png" /></a>
-                                <a href="">
+                                <a href="<%=request.getContextPath()%>/funcionarioServlet?comando=remover&id_funcionario=<%=tmp.getIdFuncionario() %>">
                                 <img src="<%=request.getContextPath()%>/imagens/delete.png" /></a>
-                                <a href="../relatorioProjetoServlet?comando=imprimir_ficha_projeto&codigoProjeto=<%=tmp.getIdFuncionario() %>"> <img src="../imagens/print.png" /></a>
+                                <a href=""> <img src="<%=request.getContextPath()%>/imagens/print.png" /></a>
                             </td>
                         </tr>
                         <% }%>
