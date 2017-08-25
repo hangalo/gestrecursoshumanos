@@ -20,13 +20,13 @@ import util.Conexao;
  */
 public class FuncaoFuncionarioDAO implements GenericoDAO<FuncaoFuncionario> {
 
-    private static final String INSERIR = "INSERT INTO funcao_funcionario(id_funcao_funcionario, funcao_funcionario, salario_funcao) values (?, ?, ?)";
+    private static final String INSERIR = "INSERT INTO funcao_funcionario(funcao_funcionario, salario_funcao) values (?, ?)";
 
     private static final String ACTUALIZAR = "UPDATE funcao_funcionario set funcao_funcionario = ?, salario_funcao = ? where id_funcao_funcionario = ?";
 
     private static final String ELIMINAR = "DELETE FROM funcao_funcionario WHERE id_funcao_funcionario = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM funcao_funcionario where id_funcao_funcionario = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM funcao_funcionario ORDER BY funcao_funcionario";
+    private static final String LISTAR_TUDO = "SELECT * FROM funcao_funcionario ORDER BY id_funcao_funcionario";
     PreparedStatement ps;
     Connection conn;
     ResultSet rs;
@@ -52,10 +52,9 @@ public class FuncaoFuncionarioDAO implements GenericoDAO<FuncaoFuncionario> {
         conn = Conexao.getConnection();
         try {
             ps = conn.prepareStatement(ACTUALIZAR);
-            ps.setInt(1, funcao.getIdFuncaoFuncionario());
-            ps.setString(2, funcao.getFuncaoFuncionario());
-            ps.setDouble(3, funcao.getSalarioFuncao());
-             ps.setInt(4, funcao.getIdFuncaoFuncionario());
+            ps.setString(1, funcao.getFuncaoFuncionario());
+            ps.setDouble(2, funcao.getSalarioFuncao());
+            ps.setInt(3, funcao.getIdFuncaoFuncionario());
             ps.executeUpdate();
         } catch (NullPointerException ex) {
         } catch (SQLException ex) {
@@ -104,7 +103,7 @@ public class FuncaoFuncionarioDAO implements GenericoDAO<FuncaoFuncionario> {
 
     @Override
     public List<FuncaoFuncionario> findAll() {
-      List<FuncaoFuncionario> funcaoFuncionarios = new ArrayList<>();
+        List<FuncaoFuncionario> funcaoFuncionarios = new ArrayList<>();
         try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(LISTAR_TUDO);
@@ -124,7 +123,7 @@ public class FuncaoFuncionarioDAO implements GenericoDAO<FuncaoFuncionario> {
 
     @Override
     public void popularComDados(FuncaoFuncionario funcao, ResultSet rs) {
-       try {
+        try {
             funcao.setIdFuncaoFuncionario(rs.getInt("id_funcao_funcionario"));
             funcao.setFuncaoFuncionario(rs.getString("funcao_funcionario"));
             funcao.setSalarioFuncao(rs.getDouble("salario_funcao"));

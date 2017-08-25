@@ -25,71 +25,41 @@
             EmpresaDAO empresaDAO = new EmpresaDAO();
             List<Empresa> empresas = empresaDAO.findAll();
         %>
-        <table class="table">
-            <thead>
-                <tr class="">
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>Data De Criacao</th>
-                    <th>Casa</th>
-                    <th>Rua </th>
-                    <th>Bairro </th>
-                    <th>Distrito</th>
-                    <th>Home Page</th>
-                    <th>E-Mail Principal</th>
-                    <th>Telefone Principal</th>
-                    <th>Telefone Secundario</th>
-                    <th>Telemovel Principal</th>
-                    <th>Telemovel Secundario</th>
-                    <th>Fax Principal</th>
-                    <th>Fax Secundario</th>
-                    <th>Municipio</th>
-                    <th>Provincia</th>
-                    <th>Logo</th>
-                    <th>Operações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%for (Empresa empresa : empresas) {%>
-                <tr class="active">
-                    <td><%=empresa.getId_empresa()%></td>
-                    <td><%=empresa.getNome_empresa()%></td>
-                    <td><%=empresa.getData_cricacao()%></td>
-                    <td><%=empresa.getCasa_empresa()%></td>
-                    <td><%=empresa.getRua_empresa()%></td>
-                    <td><%=empresa.getBairro_empresa()%></td>
-                    <td><%=empresa.getDistrito_empresa()%></td>
-                    <td><%=empresa.getHome_page()%></td>
-                    <td><%=empresa.getEmail_princiapal()%></td>
-                    <td><%=empresa.getTelefone_princiapl()%></td>
-                    <td><%=empresa.getTelefone_secundario()%></td>
-                    <td><%=empresa.getTelemovel_principal()%></td>
-                    <td><%=empresa.getTelemovel_secundario()%></td>
-                    <td><%=empresa.getFax_principal()%></td>
-                    <td><%=empresa.getFax_secundario()%></td>
-                    <td><%=empresa.getMunicipio().getNomeMunicipio()%></td>
-                    <td><%=empresa.getMunicipio().getProvinciaMunicipio().getNomeProvincia()%></td>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr class="">
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Data De Criacao</th>
+                        <th>Home Page</th>
+                        <th>Municipio</th>
+                        <th>Provincia</th>
+                        <th>Logo</th>
+                        <th>Operações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for (Empresa empresa : empresas) {%>
+                    <tr class="active">
+                        <td><%=empresa.getId_empresa()%></td>
+                        <td><%=empresa.getNome_empresa()%></td>
+                        <td><%=empresa.getData_cricacao()%></td>
+                        <td><%=empresa.getHome_page()%></td>
+                        <td><%=empresa.getMunicipio().getNomeMunicipio()%></td>
+                        <td><%=empresa.getMunicipio().getProvinciaMunicipio().getNomeProvincia()%></td>
 
-                    <td> <img src="<%=request.getContextPath()%>/showImageEmpresa?ficheiro=<%=empresa.getUrl_logo_empresa()%>" 
-                              width="60" height="60" </td>
-                    <td><a href="<%=request.getContextPath()%>/empresaServlet?comando=prepara_editar&id_empresa=<%=empresa.getId_empresa()%>">
-                            <img src="<%=request.getContextPath()%>/imagens/edit.png" /></a>
-                        <a href="<%=request.getContextPath()%>/empresaServlet?comando=eliminar&id_empresa=<%=empresa.getId_empresa()%>">
-                            <img src="<%=request.getContextPath()%>/imagens/delete.png" /></a></td>
-                            <%}%>
+                        <td> <img src="<%=request.getContextPath()%>/showImageEmpresa?ficheiro=<%=empresa.getUrl_logo_empresa()%>" 
+                                  width="60" height="60" </td>
+                        <td><a href="<%=request.getContextPath()%>/empresaServlet?comando=prepara_editar&id_empresa=<%=empresa.getId_empresa()%>">
+                                <img src="<%=request.getContextPath()%>/imagens/edit.png" /></a>
+                            <a href="<%=request.getContextPath()%>/empresaServlet?comando=eliminar&id_empresa=<%=empresa.getId_empresa()%>">
+                                <img src="<%=request.getContextPath()%>/imagens/delete.png" /></a></td>
+                                <%}%>
+                    </tr>
+                </tbody>
+            </table>
 
-
-                </tr>
-
-
-
-
-
-
-
-            </tbody>
-        </table>
-
-
+        </div>
     </body>
 </html>
