@@ -48,29 +48,33 @@ div.desc {
                 </div>
                 <div id="galeria">
                     <ul id="lista_itens">
+                        <!-- Insertion code-->
+                        <% for(Funcionario tmp : funcionarioDAO.findAll()){ %>
+                        <% request.getSession().setAttribute("obj", new FuncionarioDAO()); %>
                         <li class="gitem">
-                            <img>
+                            <div class="img">
+                               <img id="imgli" src="<%=request.getContextPath()%>/visualizaImagemServlet?id=<%=tmp.getIdFuncionario()%>&ficheiro=<%=tmp%>" class="img-responsive img-thumbnail">
+                            </div>
+                            <div class="glabel">
+                                <b id="nome"><%= tmp.getPrimeiroNomeFuncionario() + " " + tmp.getUltimoNomeFuncionario() %></b>
+                            </div>
                         </li>
-                        <li class="gitem"></li>
-                        <li class="gitem"></li>
-                        <li class="gitem"></li>
-                        <li class="gitem"></li>
-                        <li class="gitem"></li>
-                        <li class="gitem"></li>
+                        <% }%>
                     </ul>
                 </div>
             </div>
             <div id="departamentos">
-                <div>
-                    <div id="dheader">
-                        <h1 class="">Departamentos</h1>
-                    </div>
-                    <div id="">
-                    <ul id="">
-                        <li class="gitem"></li>
-                        <li class="gitem"></li>
-                    </ul>
+                <div id="dheader">
+                    <h1 class="">Departamentos</h1>
                 </div>
+                <div id="deps">
+                    <ul id="lista_ditens">
+                        <li class="ditem">
+                            <b class="dlabel">Departamento 1</b>
+                        </li>
+                        <li class="ditem"></li>
+                        <li class="ditem"></li>
+                    </ul>
                 </div>
             </div>
         </div>

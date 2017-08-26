@@ -30,6 +30,7 @@ public class Conexao {
             System.err.println("Erro na conexao com a base de dados: " + ex.getMessage());
             return null;
         }
+        
         return con;
     }
 

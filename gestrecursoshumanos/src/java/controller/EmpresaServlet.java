@@ -6,13 +6,10 @@
 package controller;
 
 import dao.EmpresaDAO;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -85,7 +82,7 @@ public class EmpresaServlet extends HttpServlet {
                     doUpload(ficheiro);
                 }
                 empresaDao.save(empresa);
-                response.sendRedirect("paginas/empresa/empresa_save.jsp");
+                response.sendRedirect("paginas/empresa/empresa_guardar.jsp");
             } else if (comando.equalsIgnoreCase("editar")) {
                 empresa.setId_empresa(Integer.parseInt(request.getParameter("id_empresa")));
                 empresa.setNome_empresa(request.getParameter("nome_empresa"));
@@ -137,7 +134,8 @@ public class EmpresaServlet extends HttpServlet {
         try {
             InputStream in = part.getInputStream();
             File f = new File("C:\\imagens_projeto\\" + part.getSubmittedFileName());
-            f.createNewFile();
+            if (!f.exists())
+                f.mkdir();
             FileOutputStream out = new FileOutputStream(f);
             byte[] buffer = new byte[1024 * 1024 * 100];
             int length;

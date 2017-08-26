@@ -174,7 +174,6 @@ public class EmpresaDAO implements GenericoDAO<Empresa> {
 
     @Override
     public Empresa findById(Integer id) {
-
         Empresa empresa = new Empresa();
         try {
             conn = Conexao.getConnection();

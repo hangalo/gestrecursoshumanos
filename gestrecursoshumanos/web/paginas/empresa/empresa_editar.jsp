@@ -55,9 +55,10 @@
         %>
 
 
-        <div class="container">
-            <h3 style="text-align: center">Ficha de Alteracao Da Empresa</h3>
-            <br/>
+       <div class="container container-signup">
+            <div>
+                <h1 class="text-center page-header header">Alterar de Empresa</h1>
+            </div>
             <form name="save_empresa" class="form-horizontal" enctype="multipart/form-data" role="form" action="<%=request.getContextPath()%>/empresaServlet?comando=editar" method="POST">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Id:</label>
@@ -106,8 +107,8 @@
                                 "nomeCb",
                                 "id_provincia",
                                 "nome_provincia",
-                                "onchange='selectChange(this, save_empresa.txtNomeMunicipio, municipioText, municipioRelac, municipioValue)'",
-                                null)%>
+                                "onchange='selectChange(this, save_empresa.idMunicipio, municipioText, municipioRelac, municipioValue)'",
+                                "")%>
                     </div>
                 </div>
                 <div class="form-group">
@@ -117,11 +118,11 @@
                                 "save_empresa",
                                 "municipio",
                                 "txtNomeProvincia",
-                                "txtNomeMunicipio",
+                                "idMunicipio",
                                 "id_municipio",
                                 "nome_municipio",
                                 "id_provincia",
-                                "", null)%>
+                                "", "")%>
 
                     </div>
                 </div>
