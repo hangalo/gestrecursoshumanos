@@ -24,7 +24,7 @@ public class DepartamentoDAO implements GenericoDAO<Departamento>{
     private static final String ACTUALIZAR = "UPDATE departamento set nome_departamento = ? WHERE id_departamento = ?";
     private static final String ELIMINAR = "DELETE FROM departamento WHERE id_departamento = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM departamento where id_departamento = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM departamento ORDER BY departamento ASC;";
+    private static final String LISTAR_TUDO = "SELECT * FROM departamento ORDER BY id_departamento ASC;";
 
 
     @Override
@@ -94,8 +94,6 @@ public class DepartamentoDAO implements GenericoDAO<Departamento>{
             System.err.println("Erro ao eliminar dados: " + ex.getLocalizedMessage());
         } finally {
             Conexao.closeConnection(conn, ps);
-            {
-            }
         }
     }
 

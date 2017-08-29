@@ -29,7 +29,7 @@
             <table class="table">
                 <thead>
                     <tr class="">
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Nome</th>
                         <th>Data De Criacao</th>
                         <th>Home Page</th>

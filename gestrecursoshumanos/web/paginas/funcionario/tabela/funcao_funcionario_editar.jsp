@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css">
         <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js"></script>
         <title>JSP Page</title>
