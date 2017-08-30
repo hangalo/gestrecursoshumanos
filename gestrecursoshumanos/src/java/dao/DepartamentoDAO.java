@@ -24,7 +24,7 @@ public class DepartamentoDAO implements GenericoDAO<Departamento>{
     private static final String ACTUALIZAR = "UPDATE departamento set nome_departamento = ? WHERE id_departamento = ?";
     private static final String ELIMINAR = "DELETE FROM departamento WHERE id_departamento = ?";
     private static final String BUSCAR_POR_CODIGO = "SELECT * FROM departamento where id_departamento = ?";
-    private static final String LISTAR_TUDO = "SELECT * FROM departamento ORDER BY departamento ASC;";
+    private static final String LISTAR_TUDO = "SELECT * FROM departamento ORDER BY nome_departamento ASC;";
 
 
     @Override
@@ -129,22 +129,22 @@ public class DepartamentoDAO implements GenericoDAO<Departamento>{
         PreparedStatement ps = null;
         Connection conn = null;
         ResultSet rs = null;
-        List<Departamento> departamento = new ArrayList<>();
+        List<Departamento> departamentos = new ArrayList<>();
         try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(LISTAR_TUDO);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Departamento empresa = new Departamento();
-                popularComDados(empresa, rs);
-                departamento.add(empresa);
+                Departamento departamento = new Departamento();
+                popularComDados(departamento, rs);
+                departamentos.add(departamento);
             }
         } catch (SQLException ex) {
             System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
         } finally {
             Conexao.closeConnection(conn);
         }
-        return departamento;
+        return departamentos;
     }
 
     @Override
