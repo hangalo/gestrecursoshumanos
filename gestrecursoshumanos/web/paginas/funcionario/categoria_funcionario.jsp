@@ -33,14 +33,36 @@
                 ev.dataTransfer.setData("text", ev.target.id);
             }
 
-            function drop(ev) {/*
+            function drop(ev) {
                 ev.preventDefault();
-                var data = ev.dataTransfer.getData("text");
-                ev.target.appendChild(document.getElementById(data));*/
                 var tmp = $('#' + ev.dataTransfer.getData("text")).children('input:first');
                 $("#myModal").modal({backdrop: 'static', keyboard: false});
-                $('#nomelbl').text("Viv Mendes");
+                
                 $('#foto').children('img:first').attr('src', '<%=request.getContextPath()%>/visualizaImagemServlet?id='+ tmp.val());
+                $.getJSON('<%=request.getContextPath()%>/funcionarioServlet?comando=get&id=' + tmp.val(), function(opts) {
+                var tmp2;
+                if(ev.target.id.indexOf("departamento") >= 0){
+                    tmp2 = $('#' + ev.target.id);
+                    tmp2parent = $('#' + tmp2.parent().attr('id'));
+                    
+                    $('#departamento').val(tmp2parent.children('input').attr('value'));
+                }                    
+                    
+                if (opts) {
+                    $('#nomelbl').text(opts.primeiroNomeFuncionario + ' ' + opts.segundoNomeFuncionario + ' ' + opts.ultimoNomeFuncionario);
+                    $('#falcunha').text(opts.alcunhaFuncionario);
+                    $('#fdatanasc').text(opts.dataNascimentoFuncionario);
+                    $('#ftelef').text(opts.telefoneFuncionario);
+                    $('#ftelem').text(opts.telemovelPrinciapal);
+                    $('#ftelemalt').text(opts.telemovelSecundario);
+                    $('#femail').text(opts.emailPrincipal);
+                    $('#femaila').text(opts.emailSecundario);
+                    $('#fcasa').text(opts.casaFuncionario);
+                    $('#frua').text(opts.ruaFuncionario);
+                    $('#fbairro').text(opts.bairroFuncionario);
+                    $('#fmunicipio').text(opts.municipio.nomeMunicipio);
+                    }
+                });
             }
             
         </script>
@@ -80,9 +102,12 @@
                 </div>
                 <div id="deps">
                     <ul id="lista_ditens">
-                        <% for(Departamento tmp : departamentoDAO.findAll()){ %>
-                        <li id="" class="ditem" ondrop="drop(event)" ondragover="allowDrop(event)">
-                            <b id="" class="dlabel"><%= tmp.getNomeDepartamento()%></b>
+                        <% 
+                            int count = 0;
+                            for(Departamento tmp : departamentoDAO.findAll()){ %>
+                        <li id="lditem<%= count++%>" class="ditem" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <b id="departamento<%= count++%>" class="dlabel"><%= tmp.getNomeDepartamento()%></b>
+                            <input id="iddepartamento<%= count++%>" type="hidden" value="<%= tmp.getIdDepartamento() %>">
                         </li>
                         <% }%>
                     </ul>
@@ -105,28 +130,34 @@
         <div class="modal-body">
             <div id="mbody" class="form-inline">
                 <div id="fields" class="input-group form-group" >
-                    <ul id="fdados" class="list-unstyled ">
-                        <li>Nome: </li>
-                        <li>Alcunha: </li>
-                        <li>Data Nascimento: </li>
-                        <li>Telefone: </li>
-                        <li>Telemovel Principal: </li>
-                        <li>Telemovel Secundario: </li>
-                        <li>Email: </li>
-                        <li>Email Alternativo: </li>
-                        <li>Municipio: </li>
-                        <li>Bairro: </li>
-                        <li>Rua: </li>
-                        <li>Casa: </li>
-                        <li class="form-group col-md-12 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                            <select id="departamento" disabled="true" class="form-control"></select>
+                    <ul id="fdados" class="list-unstyled row">
+                        <!--<li>Nome: <label id="fnome"></label></li>-->
+                        <li>Alcunha: <label id="falcunha"></label></li>
+                        <li>Data Nascimento: <label id="fdatanasc"></label></li>
+                        <li>Telefone: <label id="ftelef"></label></li>
+                        <li>Telemovel Principal: <label id="ftelem"></label></li>
+                        <li>Telemovel Secundario: <label id="ftelemalt"></label></li>
+                        <li>Email: <label id="femail"></label></li>
+                        <li>Email Alternativo: <label id="femaila"></label></li>
+                        <li>Municipio: <label id="fmunicipio"></label></li>
+                        <li>Bairro: <label id="fbairro"></label></li>
+                        <li>Rua: <label id="frua"></label></li>
+                        <li>Casa: <label id="fcasa"></label></li>
+                        <li class="form-group col-md-8 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                            <select id="departamento" disabled="true" class="form-control">
+                                <% for(Departamento tmp : new DepartamentoDAO().findAll()){ %>
+                                <option id="" class="ditem" value="<%= tmp.getIdDepartamento() %>" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <%= tmp.getNomeDepartamento()%>
+                                </option>
+                            <% }%>
+                            </select>
                         </i>
-                        <li class="form-group col-md-12 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                        <li class="form-group col-md-8 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pushpin"></i></span>
                             <select id="funcao" class="form-control" >
                             <% for(FuncaoFuncionario tmp : new FuncaoFuncionarioDAO().findAll()){ %>
-                            <option id="" class="ditem" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <option id="" class="ditem" value="<%= tmp.getIdFuncaoFuncionario() %>" ondrop="drop(event)" ondragover="allowDrop(event)">
                                 <%= tmp.getFuncaoFuncionario()%>
                             </option>
                             <% }%>

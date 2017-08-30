@@ -96,6 +96,14 @@ public class FuncionarioServlet extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
         }
+        else if(comando.equals("get")){
+            int parameter = Integer.parseInt(request.getParameter("id"));
+            funcionario = funcionarioDAO.findById(parameter);
+            String json = new Gson().toJson(funcionario);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
     }
     
     public void fillFuncionario(HttpServletRequest request){
