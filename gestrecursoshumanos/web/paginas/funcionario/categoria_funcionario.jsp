@@ -74,12 +74,13 @@
                 <div id="gheader">
                     <h1 class="page-header">Funcionarios</h1>
                 </div>
-                <div id="galeria">
+                <div id="galeria"  class="scrollbar">
                     <ul id="lista_itens">
                         <!-- Insertion code-->
+                        <% request.getSession().setAttribute("obj", new FuncionarioDAO()); %>
                         <% int i = 0;
                         for(Funcionario tmp : funcionarioDAO.findAll()){ %>
-                        <% request.getSession().setAttribute("obj", new FuncionarioDAO()); %>
+                        
                         <li id="fitem<%= i++%>" class="gitem" draggable="true" ondragstart="drag(event)" >
                             <input id="fid<%= i++%>" type="hidden" name="idFunc" value="<%= tmp.getIdFuncionario() %>">
                             <div id="hb" class="img" >
