@@ -65,14 +65,14 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input class="form-control" required="this field is required" type="text" id="fpnome" name="fpnome" placeholder="Primeiro Nome" />
                         </div>
-                        <div class="form-group col-md-6 input-group input-right">
+                        <div class="form-group col-md-5 input-group input-right">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input class="form-control" type="text" id="fsnome" name="fsnome" placeholder="Segundo Nome"/>
                         </div>
                     </div>
 
                     <div class="frow finput-group">
-                        <div class="form-group col-md-6 input-group">
+                        <div class="form-group col-md-5 input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input class="form-control" type="text" id="funome" name="funome" placeholder="Ultimo Nome"/>
                         </div>
@@ -84,12 +84,12 @@
                 
                 
                     <div class="frow finput-group">
-                        <div class="form-group col-md-4 input-group">
+                        <div class="form-group col-md-5 input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                             <input type="date" id="fdatanasc" name="fdatanasc" placeholder="Data de Nascimento" class="form-control"/>
 
                         </div>
-                        <div class="form-group col-md-6 input-group">
+                        <div class="form-group col-md-5 input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
                             <input type="file" id="fimagem" name="fimagem" placeholder="Foto Funcionario" class="form-control"/>
                         </div>
@@ -98,7 +98,7 @@
                 <div class="fgroup">
                     <h4 class="fheader">Contactos</h4>
                     <div class="frow fgroup">
-                        <div class="form-group col-md-6 input-group">
+                        <div class="form-group col-md-5 input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                             <input type="tel" id="ftel" name="ftel" placeholder="Telefone" class="form-control"/>
                         </div>
@@ -107,14 +107,14 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                             <input type="text" id="ftelemovelp" name="ftelemovelp" placeholder="Telemovel" class="form-control"/>
                         </div>
-                        <div class="form-group col-md-6 input-group finput-group">
+                        <div class="form-group col-md-5 input-group finput-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                             <input type="text" id="ftelemovels" name="ftelemovels" placeholder="Telemovel Alternativo" class="form-control"/>
                         </div>
                     </div>
 
                     <div class="frow finput-group">
-                        <div class="form-group col-md-6 input-group">
+                        <div class="form-group col-md-5 input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                             <input type="text" id="femail" name="femail" placeholder="Email" class="form-control"/>
                         </div>
@@ -125,47 +125,45 @@
                             <input type="text" id="femaila" name="femaila" placeholder="Email Alternativo" class="form-control"/>
                         </div>
                     </div>
-                
-                    <div class="frow finput-group">
-                        <div class="form-group col-md-6 input-group">
-                            <input type="hidden" id="idProvinciaActual" value="1">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                            <select id="provincia" name="provincia" class="form-control">
-                                <% for(Provincia tmp : provincias){%>
-                                <option value="<%= tmp.getIdProvincia()%>"><%=tmp.getNomeProvincia()%></option>
-                                <% }%>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-5 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                            <select id="municipio" name="municipio" class="form-control">
-                                <% /*for(Municipio tmp : municipios){%>
-                                <!--<option value="<%= tmp.getIdMunicipio()%>"><%=tmp.getNomeMunicipio()%></option>-->
-                                <% }*/%>
-                            </select>
-                        </div>
-                    </div>
-                <!-- separator-->
-                
-                <!--end-->
-                    <div class="frow finput-group">
-                        <div class="form-group col-md-5 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                            <input type="text" id="fbairro" name="fbairro" placeholder="Bairro" class="form-control"/>
-                        </div>
-
-                        <div class="form-group col-md-6 input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                            <input type="text" id="frua" name="frua" placeholder="Rua" class="form-control"/>
-                        </div>
-
-                        <div class="form-group col-md-6 input-group finput-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                            <input type="text" id="fcasa" name="fcasa" placeholder="Casa" class="form-control"/>
-                        </div>
-                    </div>
                 </div>
+                <div class="fgroup">
+                        <h4 class="fheader">Localização</h4>
+                        <div class="frow fgroup ">
+                            <div class="form-group col-md-5 input-group">
+                                <input type="hidden" id="idProvinciaActual" value="1">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                <select id="provincia" name="provincia" class="form-control">
+                                    <% for(Provincia tmp : provincias){%>
+                                    <option value="<%= tmp.getIdProvincia()%>"><%=tmp.getNomeProvincia()%></option>
+                                    <% }%>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-5 input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                <select id="municipio" name="municipio" class="form-control"></select>
+                            </div>
+                        </div>
+                    <!-- separator-->
+
+                    <!--end-->
+                        <div class="frow finput-group">
+                            <div class="form-group col-md-5 input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                <input type="text" id="fbairro" name="fbairro" placeholder="Bairro" class="form-control"/>
+                            </div>
+
+                            <div class="form-group col-md-5 input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                <input type="text" id="frua" name="frua" placeholder="Rua" class="form-control"/>
+                            </div>
+
+                            <div class="form-group col-md-5 input-group finput-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                <input type="text" id="fcasa" name="fcasa" placeholder="Casa" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
                 <div class="buttons-bot">
                     <div class="btn-left">
                         <button type="submit" class="btn btn-primary bt" >Guardar</button>
