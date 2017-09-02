@@ -32,7 +32,27 @@
             function drag(ev) {
                 ev.dataTransfer.setData("text", ev.target.id);
             }
-
+            
+            function setFieldsFromJSon(obj){
+                $('#fdados').children('li').each(function(index, element){
+                    $(element).children('label').first().text('');
+                });
+                $('#idfuncionario').val(obj.idFuncionario);
+                console.log($('#idfuncionario').val());
+                $('#nomelbl').text(obj.primeiroNomeFuncionario + ' ' + obj.segundoNomeFuncionario + ' ' + obj.ultimoNomeFuncionario);
+                $('#falcunha').text(obj.alcunhaFuncionario);
+                $('#fdatanasc').text(obj.dataNascimentoFuncionario);
+                $('#ftelef').text(obj.telefoneFuncionario);
+                $('#ftelem').text(obj.telemovelPrinciapal);
+                $('#ftelemalt').text(obj.telemovelSecundario);
+                $('#femail').text(obj.emailPrincipal);
+                $('#femaila').text(obj.emailSecundario);
+                $('#fcasa').text(obj.casaFuncionario);
+                $('#frua').text(obj.ruaFuncionario + 'k');
+                $('#fbairro').text(obj.bairroFuncionario);
+                $('#fmunicipio').text(obj.municipio.nomeMunicipio);
+            }
+            
             function drop(ev) {
                 ev.preventDefault();
                 var tmp = $('#' + ev.dataTransfer.getData("text")).children('input:first');
@@ -44,26 +64,39 @@
                 if(ev.target.id.indexOf("departamento") >= 0){
                     tmp2 = $('#' + ev.target.id);
                     tmp2parent = $('#' + tmp2.parent().attr('id'));
-                    
                     $('#departamento').val(tmp2parent.children('input').attr('value'));
                 }                    
                     
                 if (opts) {
-                    $('#nomelbl').text(opts.primeiroNomeFuncionario + ' ' + opts.segundoNomeFuncionario + ' ' + opts.ultimoNomeFuncionario);
-                    $('#falcunha').text(opts.alcunhaFuncionario);
-                    $('#fdatanasc').text(opts.dataNascimentoFuncionario);
-                    $('#ftelef').text(opts.telefoneFuncionario);
-                    $('#ftelem').text(opts.telemovelPrinciapal);
-                    $('#ftelemalt').text(opts.telemovelSecundario);
-                    $('#femail').text(opts.emailPrincipal);
-                    $('#femaila').text(opts.emailSecundario);
-                    $('#fcasa').text(opts.casaFuncionario);
-                    $('#frua').text(opts.ruaFuncionario);
-                    $('#fbairro').text(opts.bairroFuncionario);
-                    $('#fmunicipio').text(opts.municipio.nomeMunicipio);
+                        setFieldsFromJSon(opts);
                     }
                 });
+                
             }
+            
+            function mostrar(evt){
+                alert($(evt).children().first().val());
+            }
+            
+            function cadastrar(){
+                
+                console.log($('#departamento option:selected').text());
+                alert($('#idfuncionario').val());
+                $.ajax({
+                    type: "post",
+                    url: "<%=request.getContextPath()%>/categoriaFuncionarioServlet?comando=guardar",
+                    data: jQuery.param({ idfuncionario: $('#idfuncionario').val(), 
+                            iddepartamento : $('#departamento option:selected').val(), 
+                            idFuncao: $('#funcao option:selected').val()}),
+                    success: function(msg) {
+                        if(msg.indexOf('sucesso') >= 0)
+                            alert(msg);
+                    }
+                });
+               $("#myModal").modal('toggle');
+            }
+            
+            
             
         </script>
         <title>JSP Page</title>
@@ -81,7 +114,7 @@
                         <% int i = 0;
                         for(Funcionario tmp : funcionarioDAO.findAll()){ %>
                         
-                        <li id="fitem<%= i++%>" class="gitem" draggable="true" ondragstart="drag(event)" >
+                        <li id="fitem<%= i++%>" class="gitem" onclick="mostrar(this)" draggable="true" ondragstart="drag(event)" style="cursor: pointer;" >
                             <input id="fid<%= i++%>" type="hidden" name="idFunc" value="<%= tmp.getIdFuncionario() %>">
                             <div id="hb" class="img" >
                                 <img id="imgli" draggable="false" src="<%=request.getContextPath()%>/visualizaImagemServlet?id=<%=tmp.getIdFuncionario()%>" class="img-responsive img-thumbnail">
@@ -132,7 +165,7 @@
             <div id="mbody" class="form-inline">
                 <div id="fields" class="input-group form-group" >
                     <ul id="fdados" class="list-unstyled row">
-                        <!--<li>Nome: <label id="fnome"></label></li>-->
+                        <li><input type="hidden" id="idfuncionario"></li>
                         <li>Alcunha: <label id="falcunha"></label></li>
                         <li>Data Nascimento: <label id="fdatanasc"></label></li>
                         <li>Telefone: <label id="ftelef"></label></li>
@@ -174,7 +207,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Inserir</button>
+            <button type="button" class="btn btn-success" onclick="cadastrar()">Inserir</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
