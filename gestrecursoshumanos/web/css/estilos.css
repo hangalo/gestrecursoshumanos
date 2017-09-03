@@ -158,7 +158,6 @@ img{
 .ditem{
     width: 80%;
     height: 8%;
-    background-color: brown;
     margin-top: 2%;
 }
 
@@ -203,3 +202,17 @@ img{
         color-stop(0.86, rgb(28,58,148)));
 }
 
+ ul#lista_ditens > li:hover{
+    background-color: lightslategray;
+    color: white;
+    cursor: pointer;
+    /*transition-delay: 0.1s;*/
+    transition: 1s;
+    /*border-radius: 25px;*/
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+ul#lista_ditens > li{
+    
+}

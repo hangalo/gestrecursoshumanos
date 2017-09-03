@@ -6,7 +6,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -110,7 +109,8 @@ public class FuncionarioDepartamentoDAO implements GenericoDAO<FuncionarioDepart
         } finally {
             Conexao.closeConnection(conn, ps, rs);
         }
-        return funcionarioDep;    }
+        return funcionarioDep;    
+    }
 
     @Override
     public List<FuncionarioDepartamento> findAll() {
@@ -149,6 +149,25 @@ public class FuncionarioDepartamentoDAO implements GenericoDAO<FuncionarioDepart
         } catch (SQLException ex) {
             System.err.println("Erro ao carregar dados: " + ex.getLocalizedMessage());
         }    
+    }
+    
+    public boolean existsFuncionario(int id){
+        boolean vericity = true;
+        try {
+            conn = Conexao.getConnection();
+            ps = conn.prepareStatement("select * from funcionario_departamento where id_funcionario = ?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (!rs.next()){
+                vericity = false;
+                System.err.println("Não foi encontrado nenhum registo com o id: " + id);    
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
+        } finally {
+            Conexao.closeConnection(conn, ps, rs);
+        }
+        return vericity;
     }
     
 }

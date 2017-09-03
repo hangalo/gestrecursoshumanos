@@ -7,7 +7,6 @@ package controller;
 
 import dao.FuncionarioDepartamentoDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,6 +54,11 @@ public class CategoriaFuncionarioServlet extends HttpServlet {
             
             funcionarioDepartamentoDAO.save(funcionarioDepartamento);
             response.getWriter().write("Funcionario inserido no departamento com sucesso!");
+        }
+        else if(comando.equalsIgnoreCase("verificar")){
+            int idFuncionario = Integer.parseInt(request.getParameter("id"));
+            if(funcionarioDepartamentoDAO.existsFuncionario(idFuncionario))
+                response.getWriter().write("Funcionario já se encontra neste departamento");
         }
     }
 

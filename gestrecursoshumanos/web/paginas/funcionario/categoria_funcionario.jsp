@@ -31,6 +31,7 @@
 
             function drag(ev) {
                 ev.dataTransfer.setData("text", ev.target.id);
+                
             }
             
             function setFieldsFromJSon(obj){
@@ -48,7 +49,7 @@
                 $('#femail').text(obj.emailPrincipal);
                 $('#femaila').text(obj.emailSecundario);
                 $('#fcasa').text(obj.casaFuncionario);
-                $('#frua').text(obj.ruaFuncionario + 'k');
+                $('#frua').text(obj.ruaFuncionario);
                 $('#fbairro').text(obj.bairroFuncionario);
                 $('#fmunicipio').text(obj.municipio.nomeMunicipio);
             }
@@ -71,12 +72,21 @@
                         setFieldsFromJSon(opts);
                     }
                 });
-                
             }
             
             function mostrar(evt){
-                alert($(evt).children().first().val());
+                tmp = $(evt).children().first();
+                $("#myModal").modal({backdrop: 'static', keyboard: false});
+                
+                $('#foto').children('img:first').attr('src', '<%=request.getContextPath()%>/visualizaImagemServlet?id='+ tmp.val());
+                $.getJSON('<%=request.getContextPath()%>/funcionarioServlet?comando=get&id=' + tmp.val(), function(opts) {
+                    if (opts) {
+                            setFieldsFromJSon(opts);
+                        }
+                    });
+                $('#departamento').attr('disabled', false);
             }
+            
             
             function cadastrar(){
                 
@@ -96,6 +106,12 @@
                $("#myModal").modal('toggle');
             }
             
+            function verificarFuncionario(id){
+                $.get("<%=request.getContextPath()%>/categoriaFuncionarioServlet?comando=verificar&id" + id, function(data){
+                    if(data)
+                        alert(data);
+                });
+            }
             
             
         </script>
@@ -181,7 +197,7 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
                             <select id="departamento" disabled="true" class="form-control">
                                 <% for(Departamento tmp : new DepartamentoDAO().findAll()){ %>
-                                <option id="" class="ditem" value="<%= tmp.getIdDepartamento() %>" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <option id="" value="<%= tmp.getIdDepartamento() %>" ondrop="drop(event)" ondragover="allowDrop(event)">
                                 <%= tmp.getNomeDepartamento()%>
                                 </option>
                             <% }%>
@@ -191,7 +207,7 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pushpin"></i></span>
                             <select id="funcao" class="form-control" >
                             <% for(FuncaoFuncionario tmp : new FuncaoFuncionarioDAO().findAll()){ %>
-                            <option id="" class="ditem" value="<%= tmp.getIdFuncaoFuncionario() %>" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <option id="" value="<%= tmp.getIdFuncaoFuncionario() %>" ondrop="drop(event)" ondragover="allowDrop(event)">
                                 <%= tmp.getFuncaoFuncionario()%>
                             </option>
                             <% }%>
