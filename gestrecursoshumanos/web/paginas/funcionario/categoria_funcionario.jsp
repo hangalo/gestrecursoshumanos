@@ -4,6 +4,8 @@
     Author     : praveen
 --%>
 
+<%@page import="dao.FuncionarioDepartamentoDAO"%>
+<%@page import="modelo.FuncionarioDepartamento"%>
 <%@page import="dao.FuncaoFuncionarioDAO"%>
 <%@page import="modelo.FuncaoFuncionario"%>
 <%@page import="dao.DepartamentoDAO"%>
@@ -20,7 +22,7 @@
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
-        <link href="<%=request.getContextPath()%>/css/estilos.css" rel="stylesheet">
+        <link href="<%=request.getContextPath()%>/css/estilos.css?v=1.1" rel="stylesheet">
         <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js"></script>
         <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
         <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
@@ -151,12 +153,14 @@
                     <h1 class="page-header">Departamentos</h1>
                 </div>
                 <div id="deps">
-                    <ul id="lista_ditens">
+                    <ul id="lista_ditens" class="list-group">
                         <% 
+                            FuncionarioDepartamentoDAO tmp2 = new FuncionarioDepartamentoDAO();
                             int count = 0;
                             for(Departamento tmp : departamentoDAO.findAll()){ %>
-                        <li id="lditem<%= count++%>" class="ditem" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <li id="lditem<%= count++%>" class="list-group-item ditem" ondrop="drop(event)" ondragover="allowDrop(event)">
                             <b id="departamento<%= count++%>" class="dlabel"><%= tmp.getNomeDepartamento()%></b>
+                            <span class="badge"><%= tmp2.countDepartamento(tmp.getIdDepartamento()) %></span>
                             <input id="iddepartamento<%= count++%>" type="hidden" value="<%= tmp.getIdDepartamento() %>">
                         </li>
                         <% }%>
