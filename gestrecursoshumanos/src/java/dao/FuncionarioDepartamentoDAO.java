@@ -170,4 +170,23 @@ public class FuncionarioDepartamentoDAO implements GenericoDAO<FuncionarioDepart
         return vericity;
     }
     
+    public int countDepartamento(int id){
+        int count = 0;
+        try {
+            conn = Conexao.getConnection();
+            ps = conn.prepareStatement("SELECT count(id_departamento) as numero_func FROM funcionario_departamento f where id_departamento = ?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (!rs.next()){
+                System.err.println("Não foi encontrado nenhum registo com o id: " + id);    
+            }
+            count = rs.getInt("numero_func");
+        } catch (SQLException ex) {
+            System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
+        } finally {
+            Conexao.closeConnection(conn, ps, rs);
+        }
+        return count;
+    }
+    
 }

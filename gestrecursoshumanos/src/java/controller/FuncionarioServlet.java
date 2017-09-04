@@ -53,7 +53,7 @@ public class FuncionarioServlet extends HttpServlet {
                 byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
                 funcionario.setFotoFuncionario(ficheiroImagem);
                 funcionario.setUrlFotoFuncionario(ficheiro.getSubmittedFileName());
-                doUpload(ficheiro, request);
+                //doUpload(ficheiro, request);
             }
             funcionarioDAO.save(funcionario);
             response.sendRedirect("paginas/funcionario/funcionario.jsp");
@@ -118,11 +118,12 @@ public class FuncionarioServlet extends HttpServlet {
         funcionario.setTelemovelSecundario(request.getParameter("ftelemovels"));
         funcionario.setEmailPrincipal(request.getParameter("femail"));
         funcionario.setEmailSecundario(request.getParameter("femaila"));
-        funcionario.setMunicipio( new Municipio(Integer.parseInt(request.getParameter("municipio"))));
+        funcionario.setMunicipio( new Municipio());
         funcionario.setBairroFuncionario( request.getParameter("fbairro"));
         funcionario.setRuaFuncionario(request.getParameter("frua"));
         funcionario.setCasaFuncionario(request.getParameter("fcasa"));
-        funcionario.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("idMunicipio")));
+        System.out.println(request.getParameter("municipio"));
+        funcionario.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("municipio")));
 
     }
     
