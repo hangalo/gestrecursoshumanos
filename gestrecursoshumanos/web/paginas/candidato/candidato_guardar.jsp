@@ -16,15 +16,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> Candidato Cadastro </title>
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
-        <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/estilos.css?version=12">
+        <link href="<%=request.getContextPath()%>/css/jquery.datepick.css" rel="stylesheet" type="text/css"/>
         <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js"></script>
-        <link type="text/css" href="<%=request.getContextPath()%>/css/jquery.datepick.css" rel="stylesheet">
-        <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.datepick.js"></script>
+        <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery.datepick.js" type="text/javascript"></script>
+        
         <script type="text/javascript">
             $(function () {
-                $('.popupDatepicker').datepick({dateFormat: "dd/mm/yyyy"});
-                $("#inlineDatepicker").datepicker("option", "dateFormat", "dd/mm/yyyy");
-                $('#inlineDatepicker').datepick({onSelect: showDate});
+//                $('.popupDatepicker').datepick({dateFormat: "dd/mm/yyyy"});
+//                $("#inlineDatepicker").datepicker("option", "dateFormat", "dd/mm/yyyy");
+//                $('#inlineDatepicker').datepick({onSelect: showDate});
             });
 
             function showDate(date) {
@@ -50,7 +52,7 @@
 
                 for (x = 0; x < ItemArray.length; x++)
                 {
-                    if (GroupArray[x] == control.options[control.selectedIndex].value)
+                    if (GroupArray[x] === control.options[control.selectedIndex].value)
                     {
                         myEle = document.createElement("OPTION");
 
@@ -65,129 +67,140 @@
 
     </head>
     <body>
-        <div class="container">
-            <form name="candidato_save" class="form-horizontal" role="form" enctype="multipart/form-data" action="<%=request.getContextPath()%>/candidatoServlet?comando=guardar" method="POST">
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Primeiro Nome:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" id="cPnome" name="cPnome"/>
+        <div class="container container-signup">
+            <form name="candidato_save" class="form-inline" role="form" enctype="multipart/form-data" action="<%=request.getContextPath()%>/candidatoServlet?comando=guardar" method="POST">
+                <div>
+                    <h1 class="text-center page-header header">Cadastro de Candidatos</h1>
+                </div>
+                <div class="fgroup">
+                    <h4 class="fheader">Dados Pessoais</h4>
+                    <div class="frow fgroup">
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" id="cPnome" name="cPnome" placeholder="Primeiro nome"/>
+                        </div>
+                        <div class="form-group col-md-5 input-group input-right">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input required="this field is required" type="text" class="form-control" id="cSnome" name="cSnome" placeholder="Segundo nome"/>
+                        </div>
+                    </div>
+                    
+                    <div class="frow finput-group">
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" id="cUnome" name="cUnome" placeholder="Ultimo nome"/>
+                        </div>
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" id="cAfuncionario" name="cAfuncionario" placeholder="Alcunha"/>
+                        </div>
+                    </div>
+                    
+                    <div class="frow finput-group"> 
+                        <div class="form-group col-md-5 input-group" >
+                            <%
+                                DateUtil dateUtil = new DateUtil();
+                            %>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input type="text" class="form-control popupDatepicker" id="dataNascimento" name="dataNascimento" placeholder="dd/MM/yyyy"/>
+                        </div>
+                        <div class="form-group col-md-5 input-group" >
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                            <input type="file" placeholder="Foto candidato" class="form-control" id="fotoCandidato" name="fotoCandidato"/>
+                        </div>
+                        
+                            
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Segundo Nome:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" id="cSnome" name="cSnome"/>
+                <div class="fgroup">
+                    <h4 class="fheader">Contactos</h4>
+                    <div class="frow fgroup">
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input type="email" class="form-control" id="emailPrincipal" name="emailPrincipal" placeholder="Email principal"/>
+                        </div>
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input type="email" class="form-control" id="emailSecundario" name="emailSecundario" placeholder="Email secundario"/>
+                        </div>
+                    </div> 
+                    <div class="frow finput-group">
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                            <input type="number" class="form-control" id="telefonePrincipal" name="telefonePrincipal" placeholder="Telefone principal"/>
+                        </div>
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                            <input type="number" class="form-control" id="telefoneFixo" name="telefoneFixo" placeholder="Telefon fixo"/>
+                        </div>
+                    </div>
+                    <div class="frow finput-group">
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                            <input type="number" class="form-control" id="telefoneSecundario" name="telefoneSecundario" placeholder="Telefone secundario"/>
+                        </div>
+                        <div class="form-group col-md-5 input-group">
+                            
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Ultimo Nome:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" id="cUnome" name="cUnome"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Alcunha Funcionario:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" id="cAfuncionario" name="cAfuncionario"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Foto do Candidato:</label>
-                    <div class="col-xs-4" >
-                        <input type="file" class="form-control" id="fotoCandidato" 
-                               name="fotoCandidato"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Data De Nascimento:</label>
-                    <div class="col-xs-4" >
-                        <%
-                            DateUtil dateUtil = new DateUtil();
-                        %>
-                        <input type="text" class="popupDatepicker" id="dataNascimento" name="dataNascimento"
-                               placeholder="dd/MM/yyyy" readonly="readonly"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">E-Mail Principal:</label>
-                    <div class="col-xs-4">
-                        <input type="email" class="form-control" id="emailPrincipal" name="emailPrincipal"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">E-Mail Secundario:</label>
-                    <div class="col-xs-4">
-                        <input type="email" class="form-control" id="emailSecundario" name="emailSecundario"/>
-                    </div>
-                </div>   
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Telefone Fixo:</label>
-                    <div class="col-xs-4">
-                        <input type="number" class="form-control" id="telefoneFixo" name="telefoneFixo"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Telemovel Principal</label>
-                    <div class="col-xs-4">
-                        <input type="number" class="form-control" id="telefonePrincipal" name="telefonePrincipal"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Telemovel Secundario:</label>
-                    <div class="col-xs-4">
-                        <input type="number" class="form-control" id="telefoneSecundario" name="telefoneSecundario"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Rua:</label>
-                    <div class="col-xs-4">
-                        <input type="number" class="form-control" id="ruaCandidato" name="ruaCandidato"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Casa:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" id="casaCandidato" name="casaCandidato"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Bairro:</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control" id="bairroCandidato" name="bairroCandidato"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Provincia</label>
-                    <div class="col-xs-4" >
-                        <%= new HtmlComboBoxes().select("provincia",
-                                "candidato_save",
-                                "nomeCb",
+                <div class="fgroup">
+                    <h4 class="fheader">Morada</h4>
+                    <div class="frow fgroup">
+                        <div class="form-group col-md-5 input-group" >
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                            <%= new HtmlComboBoxes().select("provincia",
+                                    "candidato_save",
+                                    "nomeCb",
+                                    "id_provincia",
+                                    "nome_provincia",
+                                    "onchange='selectChange(this, candidato_save.idMunicipio, municipioText, municipioRelac, municipioValue)'",
+                                    null)%>
+                        </div>
+                        <div class="form-group col-md-5 input-group" >
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                            <%= new HtmlComboBoxes().selectDependente("municipio",
+                                    "candidato_save",
+                                    "municipio",
+                                    "txtNomeProvincia",
+                                    "idMunicipio",
+                                    "id_municipio",
+                                    "nome_municipio",
                                 "id_provincia",
-                                "nome_provincia",
-                                "onchange='selectChange(this, candidato_save.idMunicipio, municipioText, municipioRelac, municipioValue)'",
-                                null)%>
+                                "", null)%>
+                            
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-3 control-label">Municipio</label>
-                    <div class="col-xs-4" >
-                        <%= new HtmlComboBoxes().selectDependente("municipio",
-                                "candidato_save",
-                                "municipio",
-                                "txtNomeProvincia",
-                                "idMunicipio",
-                                "id_municipio",
-                                "nome_municipio",
-                            "id_provincia",
-                            "", null)%>
+                    <div class="frow finput-group">
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                            <input type="text" class="form-control" id="bairroCandidato" name="bairroCandidato" placeholder="Bairro"/>
+                        </div>
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                            <input type="text" class="form-control" id="ruaCandidato" name="ruaCandidato" placeholder="Rua do candidato"/>
+                        </div>
 
                     </div>
+                    <div class="frow finput-group">
+                        <div class="form-group col-md-5 input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input type="text" class="form-control" id="casaCandidato" name="casaCandidato" placeholder="Casa candidato"/>
+                        </div>
+                        <div class="form-group col-md-5 input-group">
+                            
+                        </div>
+                    </div>
+
+                   
                 </div>
-                <div class="col-md-4 col-md-offset-2">
-                    <button type="submit" class="btn btn-primary" >Guardar</button>
-                    <button type="submit" class="btn btn-primary bottom-left" >Fechar</button>
+                <div class="buttons-bot">
+                    <div class="btn-left">
+                        <button type="submit" class="btn btn-primary bt" >Guardar</button>
+                    </div>
+                    <div class="btn-right">
+                        <button type="button" class="btn btn-primary bt" >Cancelar</button>
+                    </div>
                 </div>
             </form>
         </div>
