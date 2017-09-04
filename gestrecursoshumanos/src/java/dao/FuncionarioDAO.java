@@ -175,7 +175,6 @@ M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M
     
     @Override
     public List<Funcionario> findAll(){
-      
         List<Funcionario> funcionarios = new ArrayList<>();
         try {
             conn = Conexao.getConnection();

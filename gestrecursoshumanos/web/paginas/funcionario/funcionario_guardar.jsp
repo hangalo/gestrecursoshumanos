@@ -51,7 +51,7 @@
        List<Provincia> provincias = provinciaDAO.findAll();
        List<Municipio> municipios = municipioDAO.findAll();
        
-       %>
+    %>
     <body>
         <div class="container container-signup">
             <div>

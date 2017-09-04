@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author BerbahouseSC30
  */
-public class Empresa {
+public class Empresa{
 
     private int id_empresa;
     private String nome_empresa;

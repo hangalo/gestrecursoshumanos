@@ -29,7 +29,6 @@ public class CandidatoDAOTest {
         CandidatoDAO instance = new CandidatoDAO();
         instance.save(candidato);
         // TODO review the generated test code and remove the default call to fail.
-
     }
 
     /**
@@ -44,7 +43,6 @@ public class CandidatoDAOTest {
         CandidatoDAO instance = new CandidatoDAO();
         instance.update(candidato);
         // TODO review the generated test code and remove the default call to fail.
-
     }
     
      /**
@@ -87,8 +85,5 @@ public class CandidatoDAOTest {
         List<Candidato> result = instance.findAll();
         assertTrue(result != null);
         // TODO review the generated test code and remove the default call to fail.
-
     }
-
-    
 }

@@ -75,7 +75,11 @@ public class DepartamentoDAO implements GenericoDAO<Departamento>{
         }
 
     }
-
+    /**
+     * 
+     * 
+     * @param departamento 
+     */
     @Override
     public void delete(Departamento departamento) {
         PreparedStatement ps = null;
@@ -96,6 +100,12 @@ public class DepartamentoDAO implements GenericoDAO<Departamento>{
             Conexao.closeConnection(conn, ps);
         }
     }
+    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
 
     @Override
     public Departamento findById(Integer id) {
@@ -144,6 +154,11 @@ public class DepartamentoDAO implements GenericoDAO<Departamento>{
         }
         return departamentos;
     }
+    /**
+     * 
+     * @param departamento
+     * @param rs 
+     */
 
     @Override
     public void popularComDados(Departamento departamento, ResultSet rs) {

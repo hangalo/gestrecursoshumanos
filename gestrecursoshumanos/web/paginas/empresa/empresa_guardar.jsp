@@ -77,7 +77,6 @@
             MunicipioDAO municipioDAO = new MunicipioDAO();
             List<Provincia> provincias = provinciaDAO.findAll();
             List<Municipio> municipios = municipioDAO.findAll();
-
         %>
         <div class="container container-signup">
             <div>

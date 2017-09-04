@@ -7,19 +7,13 @@ package controller;
 
 import dao.FuncaoFuncionarioDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import modelo.FuncaoFuncionario;
-import modelo.Funcionario;
-import modelo.Municipio;
-import org.apache.commons.io.IOUtils;
-import util.DateUtil;
 
 /**
  *
@@ -58,7 +52,7 @@ public class FuncaoFuncionarioServlet extends HttpServlet {
                 funcaoFuncionario.setSalarioFuncao(Double.parseDouble(request.getParameter("salario_funcao")));
                 System.out.println("" + request.getParameter("funcao_funcionario"));
                 System.out.println("" + funcaoFuncionario.getIdFuncaoFuncionario());
-                
+
                 funcaoFuncionarioDAO.update(funcaoFuncionario);
                 response.sendRedirect("paginas/funcionario/tabela/funcao_funcionario.jsp");
             } else if (comando.equalsIgnoreCase("eliminar")) {
