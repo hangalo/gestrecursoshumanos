@@ -72,7 +72,8 @@
                     
                 if (opts) {
                         setFieldsFromJSon(opts);
-                    }
+                }
+                $('#departamento').attr('disabled', true);
                 });
             }
             
@@ -106,6 +107,7 @@
                     }
                 });
                $("#myModal").modal('toggle');
+               $('#deps').load(document.URL +  ' #deps');
             }
             
             function verificarFuncionario(id){
@@ -113,6 +115,10 @@
                     if(data)
                         alert(data);
                 });
+            }
+            
+            function tip(){
+                
             }
             
             
@@ -132,7 +138,7 @@
                         <% int i = 0;
                         for(Funcionario tmp : funcionarioDAO.findAll()){ %>
                         
-                        <li id="fitem<%= i++%>" class="gitem" onclick="mostrar(this)" draggable="true" ondragstart="drag(event)" style="cursor: pointer;" >
+                        <li id="fitem<%= i++%>" class="gitem" onclick="mostrar(this)" onmouseover="tip()" draggable="true" ondragstart="drag(event)" style="cursor: pointer;" >
                             <input id="fid<%= i++%>" type="hidden" name="idFunc" value="<%= tmp.getIdFuncionario() %>">
                             <div id="hb" class="img" >
                                 <img id="imgli" draggable="false" src="<%=request.getContextPath()%>/visualizaImagemServlet?id=<%=tmp.getIdFuncionario()%>" class="img-responsive img-thumbnail">
@@ -154,7 +160,7 @@
                 </div>
                 <div id="deps">
                     <ul id="lista_ditens" class="list-group">
-                        <% 
+                        <%  
                             FuncionarioDepartamentoDAO tmp2 = new FuncionarioDepartamentoDAO();
                             int count = 0;
                             for(Departamento tmp : departamentoDAO.findAll()){ %>
@@ -226,12 +232,41 @@
                 </div>
             </div>
         </div>
+<!--        <div class="modal-footer">
+            <button type="button" class="btn btn-success" onclick="cadastrar()">Inserir</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>-->
+      </div>
+      
+                            
+                            
+    <!--/*Duplicate code*/-->
+    <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><label id="nomelbl"></label></h4>
+        </div>
+        <div class="modal-body">
+            <div id="mbody1" class="form-inline">
+                <div id="fotos" class="col-md-4 form-group">
+                    <ul>
+                        <li>
+                            <img id="" class="img-responsive img-thumbnail">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-success" onclick="cadastrar()">Inserir</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
+    
     </div>
   </div>
   

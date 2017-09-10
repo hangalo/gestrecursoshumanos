@@ -53,7 +53,6 @@ public class FuncionarioServlet extends HttpServlet {
                 byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
                 funcionario.setFotoFuncionario(ficheiroImagem);
                 funcionario.setUrlFotoFuncionario(ficheiro.getSubmittedFileName());
-                //doUpload(ficheiro, request);
             }
             funcionarioDAO.save(funcionario);
             response.sendRedirect("paginas/funcionario/funcionario.jsp");
@@ -61,16 +60,18 @@ public class FuncionarioServlet extends HttpServlet {
         else if (comando.equalsIgnoreCase("editar")) {
             fillFuncionario(request);
             Part ficheiro = request.getPart("fimagem");
+            funcionario.setIdFuncionario(Integer.parseInt(request.getParameter("idfunc")));
             if (ficheiro != null) {
                 byte[] ficheiroImagem = IOUtils.toByteArray(ficheiro.getInputStream());
                 funcionario.setFotoFuncionario(ficheiroImagem);
                 funcionario.setUrlFotoFuncionario(ficheiro.getSubmittedFileName());
-                doUpload(ficheiro, request);
             }
             funcionarioDAO.update(funcionario);
             response.sendRedirect("paginas/funcionario/funcionario_listar.jsp");
         } 
         else if (comando.equalsIgnoreCase("eliminar")) {
+            funcionario.setIdFuncionario(Integer.parseInt(request.getParameter("id_funcionario")));
+            funcionarioDAO.delete(funcionario);
             response.sendRedirect("paginas/funcionario/funcionario_listar.jsp");
         } 
         else if (comando.equalsIgnoreCase("prepara_editar")) {
@@ -112,7 +113,6 @@ public class FuncionarioServlet extends HttpServlet {
         funcionario.setUltimoNomeFuncionario(request.getParameter("funome"));
         funcionario.setAlcunhaFuncionario(request.getParameter("falcunha"));
         funcionario.setDataNascimentoFuncionario(DateUtil.strToDate(request.getParameter("fdatanasc")));
-        System.out.println("Viv2-->" + request.getParameter("fdatanasc"));
         funcionario.setTelefoneFuncionario(request.getParameter("ftel"));
         funcionario.setTelemovelPrinciapal(request.getParameter("ftelemovelp"));
         funcionario.setTelemovelSecundario(request.getParameter("ftelemovels"));
@@ -122,7 +122,6 @@ public class FuncionarioServlet extends HttpServlet {
         funcionario.setBairroFuncionario( request.getParameter("fbairro"));
         funcionario.setRuaFuncionario(request.getParameter("frua"));
         funcionario.setCasaFuncionario(request.getParameter("fcasa"));
-        System.out.println(request.getParameter("municipio"));
         funcionario.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("municipio")));
 
     }

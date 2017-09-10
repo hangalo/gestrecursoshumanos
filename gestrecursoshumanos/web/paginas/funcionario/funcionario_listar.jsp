@@ -50,7 +50,7 @@
                             <td><%= i++ %></td>
                             <td><img src="<%=request.getContextPath()%>/visualizaImagemServlet?id=<%=tmp.getIdFuncionario()%>&ficheiro=<%=tmp%>" width="60" height="60"> </td>
                             <td colspan=""><%= tmp.getPrimeiroNomeFuncionario() + " " + tmp.getSegundoNomeFuncionario() + " " + tmp.getUltimoNomeFuncionario() %></td>
-                            <td><%= request.getAttribute("tmp") %><%= tmp.getAlcunhaFuncionario() %></td>
+                            <td><%= tmp.getAlcunhaFuncionario() %></td>
                             <td><%= tmp.getDataNascimentoFuncionario() %></td>
                             <td><%= tmp.getTelefoneFuncionario() %></td>
                             <td><%= tmp.getTelemovelPrinciapal() %></td>
@@ -63,10 +63,14 @@
                             <td><%= tmp.getMunicipio().getNomeMunicipio()%></td>
                             <td>
                                 <a href="<%=request.getContextPath()%>/funcionarioServlet?comando=prepara_editar&id=<%=tmp.getIdFuncionario()%>">
-                                <img src="<%=request.getContextPath()%>/imagens/edit.png" /></a>
-                                <a href="<%=request.getContextPath()%>/funcionarioServlet?comando=remover&id_funcionario=<%=tmp.getIdFuncionario() %>">
-                                <img src="<%=request.getContextPath()%>/imagens/delete.png" /></a>
-                                <a href=""> <img src="<%=request.getContextPath()%>/imagens/print.png" /></a>
+                                    <img src="<%=request.getContextPath()%>/imagens/edit.png" />
+                                </a>
+                                <a href="<%=request.getContextPath()%>/funcionarioServlet?comando=eliminar&id_funcionario=<%=tmp.getIdFuncionario() %>">
+                                    <img src="<%=request.getContextPath()%>/imagens/delete.png" />
+                                </a>
+                                <a href=""> 
+                                    <img src="<%=request.getContextPath()%>/imagens/print.png" />
+                                </a>
                             </td>
                         </tr>
                         <% }%>

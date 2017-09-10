@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label class="col-xs-3 control-label">Id:</label>
                 <div class="col-xs-5" >
-                    <input type="text" class="form-control" id="id_colocacao" name="id_colocacao" value="<%=funcionario.getIdFuncionario()%>" readonly="readonly"/>
+                    <input type="text" class="form-control" id="idfunc" name="idfunc" value="<%=funcionario.getIdFuncionario()%>" readonly="readonly"/>
                 </div>
             </div>
             

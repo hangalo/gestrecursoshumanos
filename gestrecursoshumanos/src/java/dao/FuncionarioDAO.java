@@ -14,7 +14,6 @@ import java.util.List;
 import modelo.Municipio;
 import modelo.Funcionario;
 import util.Conexao;
-import java.sql.Date;
 
 /**
  *
@@ -71,7 +70,7 @@ M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M
             ps.setString(2, funcionario.getSegundoNomeFuncionario());
             ps.setString(3, funcionario.getUltimoNomeFuncionario());
             ps.setString(4, funcionario.getAlcunhaFuncionario());
-            ps.setDate(5, new Date(0));
+            ps.setDate(5, new java.sql.Date(funcionario.getDataNascimentoFuncionario().getTime()));
             ps.setBytes(6, funcionario.getFotoFuncionario());
             ps.setString(7, funcionario.getUrlFotoFuncionario());
             ps.setString(8, funcionario.getTelefoneFuncionario());
@@ -123,6 +122,7 @@ M.nome_municipio FROM funcionario F inner join municipio M on F.id_municipio = M
             ps.setInt(16, funcionario.getMunicipio().getIdMunicipio());
             ps.setInt(17, funcionario.getIdFuncionario());
             ps.execute();
+            System.out.println("" + funcionario.getIdFuncionario());
 
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados: " + e.getMessage());
