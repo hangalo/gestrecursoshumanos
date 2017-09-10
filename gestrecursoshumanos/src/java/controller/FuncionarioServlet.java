@@ -123,7 +123,6 @@ public class FuncionarioServlet extends HttpServlet {
         funcionario.setRuaFuncionario(request.getParameter("frua"));
         funcionario.setCasaFuncionario(request.getParameter("fcasa"));
         funcionario.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("municipio")));
-        funcionario.getMunicipio().setIdMunicipio(Integer.parseInt(request.getParameter("idMunicipio")));
         
     }
     
